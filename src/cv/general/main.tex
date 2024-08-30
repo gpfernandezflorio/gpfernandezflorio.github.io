@@ -1,0 +1,149 @@
+% LaTeX Template: Curriculum Vitae
+%
+% Source: http://www.howtotex.com/
+% Feel free to distribute this template, but please keep the
+% referal to HowToTeX.com.
+% Date: July 2011
+
+\documentclass[paper=a4,fontsize=11pt]{scrartcl} % KOMA-article class
+
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{amsmath,amsfonts,amsthm}     % Math packages
+\usepackage{graphicx}                    % Enable pdflatex
+\usepackage[svgnames]{xcolor}            % Colors by their 'svgnames'
+\usepackage{geometry}
+    \textheight=700px                    % Saving trees ;-)
+\usepackage{url}
+
+\frenchspacing              % Better looking spacings after periods
+\pagestyle{empty}           % No pagenumbers/headers/footers
+
+%%% Custom sectioning (sectsty package)
+%%% ------------------------------------------------------------
+\usepackage{sectsty}
+
+\sectionfont{%                      % Change font of \section command
+    \usefont{OT1}{phv}{b}{n}%       % bch-b-n: CharterBT-Bold font
+    \sectionrule{0pt}{0pt}{-5pt}{1pt}}
+
+%%% Macros
+%%% ------------------------------------------------------------
+\newlength{\spacebox}
+\settowidth{\spacebox}{8888888888}          % Box to align text
+\newcommand{\sepspace}{\vspace*{1em}}       % Vertical space macro
+
+\newcommand{\MyName}[1]{ % Name
+        \Huge \usefont{OT1}{phv}{b}{n} \hfill #1
+        \par \normalsize \normalfont}
+
+\newcommand{\MySlogan}[1]{ % Slogan (optional)
+        \large \usefont{OT1}{phv}{m}{n}\hfill \textit{#1}
+        \par \normalsize \normalfont}
+
+\newcommand{\NewPart}[1]{\section*{\uppercase{#1}}}
+
+\newcommand{\NewSubPart}[1]{\subsection*{\uppercase{#1}}}
+
+\newcommand{\PersonalEntry}[2]{
+        \noindent\hangindent=0em\hangafter=0 % Indentation
+        \parbox{10em}{        % Box to align text
+        \textit{#1}}               % Entry name (birth, address, etc.)
+        \hspace{1.5em} #2 \par}    % Entry value
+
+\newcommand{\SkillsEntry}[2]{      % Same as \PersonalEntry
+        \noindent\hangindent=0em\hangafter=0 % Indentation
+        \parbox{10em}{        % Box to align text
+        \textit{#1}}               % Entry name (birth, address, etc.)
+        \hspace{1.5em} #2 \par}    % Entry value
+
+\newcommand{\EducationEntry}[4]{
+        \noindent \textbf{#1} \hfill      % Study
+        \colorbox{White}{%
+            \parbox{10em}{%
+            \hfill\color{Black}#2}} \par  % Duration
+        \noindent \textit{#3} \par        % School
+        \noindent\hangindent=2em\hangafter=0 \small #4 % Description
+        \normalsize \par}
+
+\newcommand{\WorkEntry}[4]{               % Same as \EducationEntry
+        \noindent \textbf{#1} \hfill      % Jobname
+        \colorbox{White}{\color{Black}#2} \par  % Duration
+        \noindent \textit{#3} \par              % Company
+        \noindent\hangindent=2em\hangafter=0 \small #4 % Description
+        \normalsize \par}
+
+%%% Begin Document
+%%% ------------------------------------------------------------
+\begin{document}
+% you can upload a photo and include it here...
+%\begin{wrapfigure}{l}{0.5\textwidth}
+%   \vspace*{-2em}
+%       \includegraphics[width=0.15\textwidth]{photo}
+%\end{wrapfigure}
+
+\MyName{Gonzalo Pablo Fernández}
+%\MySlogan{Licenciatura en Ciencias de la Computación}
+\MySlogan{\url{gpfernandez@dc.uba.ar}}
+
+\sepspace
+
+%%% Datos Personales
+%%% ------------------------------------------------------------
+%\NewPart{Datos Personales}{}
+
+%\PersonalEntry{Fecha de Nacimiento}{8 de Mayo de 1991}
+%\PersonalEntry{Address}{111 First St, New York}
+%\PersonalEntry{Phone}{(123) 000-0000}
+%\PersonalEntry{Correo Electrónico}{\url{gpfernandez@dc.uba.ar}}
+
+%%% Educación
+%%% ------------------------------------------------------------
+\NewPart{Educación}{}
+
+  %% Doctorado
+  \EducationEntry{Doctorado en Ciencia y Tecnología}{Desde Octubre de 2021}{Universidad Nacional de Quilmes}
+  {\textbf{Título}: El Gran Bache: La relación entre el enfoque didáctico y el entorno de programación en la enseñanza de la programación
+  \\ \\
+  \textbf{Resumen}: Este trabajo busca analizar distintas herramientas y enfoques didácticos para la enseñanza de la programación en el nivel medio
+  y cómo impacatan en el aprendizaje posterior de la programación en el nivel superior, poniendo especial énfasis en la transición entre
+  entornos de programación visuales y lenguajes de programación textuales.
+  }
+
+    \sepspace
+
+  %% Licenciatura
+  \EducationEntry{Licenciatura en Ciencias de la Computación}{2020}{Facultad de Ciencias Exactas y Naturales - Universidad de Buenos Aires}
+  {\textbf{Título de Tesis}: Estimación de la Veracidad de Expresiones Faciales utilizando Aprendizaje Profundo
+    %\footnote{\url{https://www.dc.uba.ar/listado-tesis-de-licenciatura/}}
+    \\ \\
+    \textbf{Resumen}: Este trabajo explora y evalúa múltiples métodos de clasificación basados en redes neuronales profundas entrenados para detectar
+    videos que retraten expresiones faciales fingidas.
+  }
+
+    \sepspace
+
+  %% Intermedio
+%  \EducationEntry{Analista Universitario en Computación (Título Intermedio)}{2016}{Universidad de Buenos Aires}
+
+%    \sepspace
+
+  %% Secundaria
+  \EducationEntry{Secundario Bachiller Orientado en Ciencias y Letras}{2008}{Colegio Paideia}
+
+
+%%% Experiencia Académica
+%%% ------------------------------------------------------------
+\NewPart{Experiencia Académica}{}
+
+%% Universitaria
+\NewSubPart{Universitaria}{}
+
+\input{doc_completos.tex}
+%\input{doc_simplificados.tex}
+
+\input{full}
+%\input{resume}
+
+\end{document}
