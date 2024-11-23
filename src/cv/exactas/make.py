@@ -24,6 +24,11 @@ def main():
     shutil.rmtree(carpeta_tmp)
   os.mkdir(carpeta_tmp)
 
+  os.chdir("..")
+  if os.system("node datos.js exactas dst:exactas") != 0:
+    fail("No se generaron los archivos de datos (node datos.js)")
+  os.chdir("exactas")
+
   for f in src_template:
     if os.path.isfile(os.path.join(carpeta_template, f)):
       shutil.copy2(os.path.join(carpeta_template, f), carpeta_tmp)
