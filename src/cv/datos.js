@@ -21,11 +21,12 @@ const claves = {
     PI: "Profesor Instructor"
   },
   en: {
-    // Para docente
+    // Para docente y eventos
     DC:"Departamento de Computación (DC) - Facultad de Ciencias Exactas y Naturales (FCEyN) - Universidad de Buneos Aires (UBA)",
     Unahur:"Universidad Nacional de Hurlingham (UNaHur)",
     Unipe:"Universidad Pedagógica Nacional (UniPe)",
     UNQ:"Universidad Nacional de Quilmes (UNQ)",
+    UNC:"Universidad Nacional de Córdoba (UNC)",
     // Para investigación
     ICPR20:"International Conference on Pattern Recognition (ICPR) 2020",
     JADiCC21:"Jornadas Argentinas de Didáctica de las Ciencias de la Computación (JADiCC) 2021",
@@ -46,6 +47,41 @@ const claves = {
 
 const todos_mis_datos = {
   investigacion: [
+    { // Proyecto UBACyT 2018
+      nombre: "UBACyT 2018 Mod II GF, Estudiante, Programación científica 2018-2019",
+      título: "Análisis automático de la dinámica facial y corporal",
+      código: "20020170200126BA",
+      info:["Acreditado y financiado.","\\textbf{Director}: Daniel Acevedo"]
+    },
+    { // JADiPro 2018
+      nombre: "Primeras \\textbf{Jornadas Argentinas de Didáctica de la Programación} (JADiPro 2018)",
+      rol: "Asistente",
+      fecha: {a:2018,d:[{m:5,d:31},{m:6,d:1}]},
+      en: "UNQ",
+      url: "https://jadipro.unq.edu.ar/event/1eras-jadipro-2018-05-31-2018-06-01-5/page/introduccion-1eras-jadipro"
+      // {Presentación de dos posters:}
+      // \begin{itemize}
+      //   \item Despertando Vocaciones en Computación por Medio de la Resolución de Problemas con Programación\footnote{
+      //     \url{https://drive.google.com/file/d/11Q6lYX6R9nhxT7xC7PeMLssZSbS47I1a/view}}
+      //   \item La Programación y su Didáctica como parte de la Formación Docente en Ciencia y Tecnología\footnote{
+      //     \url{https://drive.google.com/file/d/1tzRguCk1-sZkQwk8KVUB_AdLvE_K2uGa/view}}
+      // \end{itemize}
+      // \medskip
+    },
+    { // JADiPro 2019
+      nombre: "Segundas \\textbf{Jornadas Argentinas de Didáctica de la Programación} (JADiPro 2019)",
+      rol: "Asistente",
+      fecha: {a:2019,m:6,d:[7,8]},
+      en: "UNC"
+      // {Presentación de dos posters:}
+      // \begin{itemize}
+      //   \item Formación docente complementaria para la implementación de La Programación y su Didáctica\footnote{
+      //     \url{https://drive.google.com/open?id=16m6bdXDUZxmSbBeGUZ23HNGjkllkLbu-}}
+      //   \item Electrónica aplicada para Ciencias y Tecnología con Arduino en la Escuela\footnote{
+      //     \url{https://drive.google.com/open?id=16iX87DDbirIjMgsFyXKE8rtv7wthb7s8}}
+      // \end{itemize}
+      // \medskip
+    },
     { // 2020 Tesis de Licenciatura
       nombre: "Estimación de la Veracidad de Expresiones Faciales utilizando Aprendizaje Profundo",
       año: 2020,
@@ -53,6 +89,7 @@ const todos_mis_datos = {
       en: [
         "\\textbf{Tesis de Licenciatura} para la carrera Licenciatura en Ciencias de la Computación",
         "Facultad de Ciencias Exactas y Naturales, UBA",
+        "Defendida el 13 de Marzo de 2020",
         "\\textbf{Directora}: María Elena Buemi",
         "\\textbf{Jurados}: Enrique Segura y Daniel Acevedo"
       ],
@@ -72,12 +109,26 @@ const todos_mis_datos = {
       doi: "10.1049/icp.2021.1467",
       url: "doi"
     },
+    { // JADiCC 2021
+      nombre: "Primeras \\textbf{Jornadas Argentinas de Didáctica de las Ciencias de la Computación} (JADiCC 2021)",
+      rol: "Asistente",
+      fecha: {a:2021,m:11,d:[4,5,6]},
+      en: "Fundación Sadosky",
+      url: "https://jadicc2021.program.ar/"
+    },
     { // 2021 JADICC AelE
       nombre: "Arduino en la Escuela: una herramienta versátil para la enseñanza de programación y robótica",
       año: 2021,
       autores: ["YO", "María Belén Ticona Oquendo", "CCM"],
       en: "JADiCC21",
       url: "https://jadicc2021.program.ar/wp-content/uploads/2021/10/JADICC2021_paper_56.pdf"
+    },
+    { // JADiCC 2022
+      nombre: "Segundas \\textbf{Jornadas Argentinas de Didáctica de las Ciencias de la Computación} (JADiCC 2022)",
+      rol: "Asistente",
+      fecha: {a:2022,m:8,d:[18,19,20]},
+      en: "Universidad Nacional del Nordeste",
+      url: "https://jadicc2022.unne.edu.ar/"
     },
     { // 2022 JADICC Enfoque espiralado
       nombre: "Aprender programación usando bloques y texto en forma simultánea - Un enfoque espiralado",
@@ -86,6 +137,13 @@ const todos_mis_datos = {
       en: "JADiCC22",
       url: "https://repositorio.unne.edu.ar/handle/123456789/50765"
     },
+    { // JAIIO 2023
+      nombre: "\\textbf{Simposio Argentino de Educación en Informática} (SAEI) dentro de las 52$^{\\circ}$ \\textbf{Jornadas Argentinas de Informática} (JAIIO 2023)",
+      rol: "Asistente",
+      fecha: {a:2023,m:9,d:7},
+      en: "Universidad Nacional de Tres de Febrero",
+      url: "https://52jaiio.sadio.org.ar/"
+    },
     { // 2023 JAIIO Relevamiento
       nombre: "Relevamiento de conocimientos previos de programación en el nivel universitario",
       año: 2023,
@@ -93,12 +151,19 @@ const todos_mis_datos = {
       en: "JAIIO23",
       url: "https://publicaciones.sadio.org.ar/index.php/JAIIO/article/view/632/647"
     },
-    { // 2024 EJS Relevamiento
-      nombre: "Relevamiento de conocimientos previos de programación en el nivel universitario",
-      año: 2024,
-      autores: ["YO", "CECI", "FIDEL"],
-      en: "Electronic Journal of SADIO (EJS) 23 (2) 2024, pp 150-175",
-      url: "https://publicaciones.sadio.org.ar/index.php/EJS/article/view/862/701"
+    { // JIF 2023
+      nombre: "V \\textbf{Jornadas de Investigadores en Formación en Ciencia y Tecnología} (JIF 2023)",
+      rol: "Integrante del \\textbf{Comité Científico}",
+      fecha: {a:2023,m:9,d:[28,29]},
+      en: "UNQ",
+      url: "https://sites.google.com/view/jif-cyt-unq-2023/"
+    },
+    { // JADiCC 2023
+      nombre: "Terceras \\textbf{Jornadas Argentinas de Didáctica de las Ciencias de la Computación} (JADiCC 2023)",
+      rol: "Integrante del \\textbf{Comité de Programa}",
+      fecha: {a:2023,m:12,d:[1,2]},
+      en: "Universidad Nacional del Comahue",
+      url: "https://jadicc2023.program.ar/"
     },
     { // 2023 JADICC Taller DOV 23
       nombre: "Enseñanza de fundamentos conceptuales de programación usando Arduino",
@@ -114,12 +179,33 @@ const todos_mis_datos = {
       en: "JADiCC23"/*,
       url: ""*/
     },
+    { // 2024 EJS Relevamiento
+      nombre: "Relevamiento de conocimientos previos de programación en el nivel universitario",
+      año: 2024,
+      autores: ["YO", "CECI", "FIDEL"],
+      en: "Electronic Journal of SADIO (EJS) 23 (2) 2024, pp 150-175",
+      url: "https://publicaciones.sadio.org.ar/index.php/EJS/article/view/862/701"
+    },
     { // 2024 JAR AelE
       nombre: "AelE: una herramienta para la enseñanza de programación basada en Arduino",
       año: 2024,
       autores: ["YO", "CCM"],
       en: "JAR24"/*,
       url: ""*/
+    },
+    { // JAIIO 2024
+      nombre: "\\textbf{Simposio Argentino de Educación en Informática} (SAEI) dentro de las 53$^{\\circ}$ \\textbf{Jornadas Argentinas de Informática} (JAIIO 2024)",
+      rol: "Asistente",
+      fecha: {a:2024,m:8,d:[14,15]},
+      en: "Universidad Nacional del Sur",
+      url: "https://jaiio53.clei.org/"
+    },
+    { // CLEI 2024
+      nombre: "50$^a$ \\textbf{Conferencia Latinoamericana de Informática} (CLEI 2024)",
+      rol: "Asistente",
+      fecha: {a:2024,m:8,d:[14,15]},
+      en: "Universidad Nacional del Sur",
+      url: "https://conferencia2024.clei.org/"
     },
     { // 2024 CLEI AelE
       nombre: "AelE: a versatile tool for teaching programming and robotics using Arduino",
@@ -128,6 +214,13 @@ const todos_mis_datos = {
       en: "CLEI24",
       doi:"10.1109/CLEI64178.2024.10700288",
       url: "doi"
+    },
+    { // JADiCC 2024
+      nombre: "Cuartas \\textbf{Jornadas Argentinas de Didáctica de las Ciencias de la Computación} (JADiCC 2024)",
+      rol: "Integrante del \\textbf{Comité de Programa}",
+      fecha: {a:2024,m:10,d:[23,24,25]},
+      en: "Universidad Nacional de Río Cuarto",
+      url: "https://jadicc2024.dc.exa.unrc.edu.ar/"
     },
     { // 2024 JADICC UBA XXII
       nombre: "Iniciación a la programación en contextos de encierro con Arduino",
@@ -285,6 +378,18 @@ const obtenerLcencias = function() {
   return "\n  \\begin{itemize}\n    \\item 01/08/2023 - 29/02/2024\n  \\end{itemize}\n"
 };
 
+const esUnaPublicacion = function(elemento) {
+  return 'en' in elemento && 'año' in elemento && 'autores' in elemento;
+};
+
+const esUnProyecto = function(elemento) {
+  return 'título' in elemento && 'código' in elemento;
+};
+
+const esUnCongreso = function(elemento) {
+  return 'en' in elemento && 'rol' in elemento && 'fecha' in elemento;
+};
+
 const modelos = {
   exactas:{
     esqueleto: function(contenido) {
@@ -301,14 +406,14 @@ const modelos = {
         ]
       },
       { nombre:"docentes.tex",
-        modeloElemento: function(elemento) {
-          const cargo = procesarCargo(elemento);
-          const materia = procesarMateria(elemento);
-          const institucion = procesarInstitucion(elemento);
-          const tiempo = procesarTiempo(elemento);
-          return `      \\WorkEntry{\\textbf{${cargo}} ${materia}}\n      {${institucion}}\n      {${tiempo}}`;
-        },
         esqueleto: {
+          modeloElemento: function(elemento) {
+            const cargo = procesarCargo(elemento);
+            const materia = procesarMateria(elemento);
+            const institucion = procesarInstitucion(elemento);
+            const tiempo = procesarTiempo(elemento);
+            return `      \\WorkEntry{\\textbf{${cargo}} ${materia}}\n      {${institucion}}\n      {${tiempo}}`;
+          },
           secciones:[
             {letra:'a', nombre:'Universitarios'/*, filtro: x => {
               return ["DC","Unipe","UNQ","Unahur"].includes(x.en);
@@ -320,35 +425,54 @@ const modelos = {
         }
       },
       { nombre:"cientificos.tex",
-        modeloElemento: function(elemento) {
-          const anio = procesarAnio(elemento);
-          const nombre = procesarNombre(elemento);
-          const en = procesarEn(elemento);
-          const autores = procesarAutores(elemento);
-          return `      \\WorkEntry{${anio} \\textbf{${nombre}}}\n      {${autores}}\n      {${en}}`;
-        },
         esqueleto: {
+          elementos: todos_mis_datos.investigacion,
           secciones:[
-            {letra:'a', nombre:'Trabajos Publicados',
-              elementos: todos_mis_datos.investigacion
+            {letra:'a', nombre:'Trabajos Publicados', filtro:esUnaPublicacion,
+              modeloElemento: function(elemento) {
+                const anio = procesarAño(elemento);
+                const nombre = procesarNombre(elemento);
+                const en = procesarEn(elemento);
+                const autores = procesarAutores(elemento);
+                return `      \\WorkEntry{${anio} \\textbf{${nombre}}}\n      {${autores}}\n      {${en}}`;
+              }
             },
             {letra:'b', nombre:'Participación en congresos o acontecimientos nacionales o internacionales',
-              elementos:[]
+              filtro:esUnCongreso,
+              modeloElemento: function(elemento) {
+                const nombre = procesarNombre(elemento);
+                const rol = procesarRol(elemento);
+                const fecha = procesarFecha(elemento.fecha);
+                const en = procesarEn(elemento);
+                return `      \\WorkEntry{${nombre}}\n      {${rol}}\n      {${fecha}}\n      {${en}}`;
+              }
             },
             {letra:'c', nombre:'Formación de Recursos Humanos.', elementos:[]},
-            {letra:'d', nombre:'Participación en Proyectos de Investigación', elementos:[]},
+            {letra:'d', nombre:'Participación en Proyectos de Investigación', filtro:esUnProyecto,
+              modeloElemento: function(elemento) {
+                const nombre = procesarNombre(elemento);
+                const título = procesarTítulo(elemento);
+                const código = procesarCódigo(elemento);
+                let info = procesarInfo(elemento);
+                if (info.length > 0) {
+                  info = `\n      {${info}}`;
+                }
+                return `      \\WorkEntry{\\textbf{${nombre}}}\n      {Código ${código}}\n      {${título}}${info}`;
+              }
+            },
             {letra:'e', nombre:'Cursos de Posgrado no incluidos en la carrera de Doctorado.', elementos:[]},
             {letra:'f', nombre:'Otros antecedentes científicos no considerados en los puntos anteriores', elementos:[]}
           ]
         }
       }
     ],
-    modeloSeccion: function(dataSeccion, dataArchivo) {
+    modeloSeccion: function(dataSeccion, esqueleto) {
       let contenido = [];
-      const elementos = 'elementos' in dataSeccion ? dataSeccion.elementos : dataArchivo.elementos;
-      const filtroSeccion = 'filtro' in dataSeccion ? dataSeccion.fitro : x => true;
+      const elementos = 'elementos' in dataSeccion ? dataSeccion.elementos : esqueleto.elementos;
+      const filtroSeccion = 'filtro' in dataSeccion ? dataSeccion.filtro : x => true;
+      const modeloElemento = 'modeloElemento' in dataSeccion ? dataSeccion.modeloElemento : esqueleto.modeloElemento;
       for (let elemento of elementos.filter(filtroSeccion)) {
-        contenido.push(dataArchivo.modeloElemento(elemento));
+        contenido.push(modeloElemento(elemento));
       }
       if (contenido.length == 0) {
         contenido = "    \\\\ No corresponde";
@@ -375,7 +499,7 @@ const procesarArchivo = function(dataArchivo, base) {
     let contenido = [];
     const modeloSeccion = 'modeloSeccion' in dataArchivo.esqueleto ? dataArchivo.esqueleto.modeloSeccion : modelos[base].modeloSeccion;
     for (let seccion of dataArchivo.esqueleto.secciones) {
-      contenido.push(modeloSeccion(seccion, dataArchivo));
+      contenido.push(modeloSeccion(seccion, dataArchivo.esqueleto));
     }
     escribirArchivo(dataArchivo.nombre, modelos[base].esqueleto(contenido.join("\n\n")));
   }
@@ -422,6 +546,60 @@ const procesarInstitucion = function(elemento) {
   return "?";
 };
 
+const procesarRol = function(elemento) {
+  return elemento.rol;
+};
+
+const procesarFecha = function(elemento) {
+  let resultado = `${elemento.a}`;
+  if ('m' in elemento) {
+    resultado = `${mes(elemento.m)} de ${resultado}`;
+  }
+  if ('d' in elemento) {
+    resultado = `${procesarDias(elemento.d)} de ${resultado}`;
+  }
+  return resultado;
+};
+
+const procesarDias = function(d) {
+  if (typeof d === 'number') {
+    return `${d}`;
+  }
+  if (Array.isArray(d)) {
+    dias = d.map(procesarDias);
+    if (dias.length > 1) {
+      let ultimo = dias.splice(-1)[0];
+      return `${dias.join(", ")} y ${ultimo}`;
+    } else {
+      return `${dias[0]}`;
+    }
+  }
+  if ('m' in d && 'd' in d) {
+    return `${procesarDias(d.d)} de ${mes(d.m)}`
+  }
+  return "?";
+}
+
+const procesarTítulo = function(elemento) {
+  return elemento.título;
+};
+
+const procesarCódigo = function(elemento) {
+  return elemento.código;
+};
+
+const procesarInfo = function(elemento) {
+  if ('info' in elemento) {
+    let info = elemento.info;
+    if (!Array.isArray(info)) {
+      info = [info];
+    }
+    info = info.join("\\\\\n      ");
+    return info;
+  }
+  return "";
+};
+
 const procesarTiempo = function(elemento) {
   if ('durante' in elemento) {
     periodos = elemento.durante;
@@ -447,7 +625,7 @@ const procesarTiempo = function(elemento) {
   return "?";
 };
 
-const procesarAnio = function(elemento) {
+const procesarAño = function(elemento) {
   return elemento.año;
 };
 
