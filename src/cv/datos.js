@@ -42,10 +42,98 @@ const claves = {
     "CCM":"Christian Cossio-Mercado",
     "FIDEL":"Pablo E. ``Fidel'' Martínez López",
     "CECI":"Cecilia Martínez"
+  },
+  roles: {
+    taller: "Dictado del taller",
+    taller_s: "Dictado de los talleres"
+  },
+  taller: {
+    "Problemas":"¿Cómo enseñar a programar? Una didáctica de la programación basada en la resolución de problemas",
+    "Didáctica":"Taller de Didáctica de la Programación",
+    "Electrónica":"Taller de Electrónica Aplicada",
+    "Evaluación":"Taller de Evaluación",
+    "Programación":"Taller de Programación y Robótica",
+    "Robótica":"Taller de Robótica",
+    "Apps":"Taller de Aplicaciones Móviles para el Aula"
   }
 };
 
 const todos_mis_datos = {
+  extends_rep: { // Actividades que se repiten
+    SdEC:{
+      nombre: "Semana de la Enseñanza de las Ciencias",
+      instancias:[{
+        edición: "2017",
+        fecha:{a:2017,m:7,d:[13,14],h:", de 13:00hs a 15:30hs"},
+        rol: {taller: ["Electrónica","Robótica"]}
+      },{
+        edición: "2018",
+        fecha:{a:2018,m:7,d:[10,11,12],h:", de 16:00hs a 18:30hs"},
+        rol: {taller: ["Didáctica","Electrónica","Robótica"]}
+      },{
+        edición: "2019",
+        fecha:{a:2019,m:7,d:[10,11,12],h:", de 17:00hs a 19:30hs"},
+        rol: {taller: ["Didáctica","Electrónica","Apps"]}
+      },{
+        edición: "2022",
+        fecha:{a:2022,m:7,d:[12,14],h:", de 10:00hs a 12:30hs"},
+        rol: {taller: ["Didáctica","Electrónica"]}
+      },{
+        edición: "2023",
+        fecha:{a:2023,m:7,d:[11,12],h:", de 10:30hs a 13:00hs"},
+        rol: {taller: ["Didáctica","Electrónica"]}
+      },{
+        edición: "2024",
+        fecha:{a:2024,m:7,d:[10,11,12],h:", de 10:30hs a 13:00hs"},
+        rol: {taller: ["Didáctica","Electrónica","Evaluación"]}
+      }]
+    },
+    EC:{
+      instancias:[{
+        nombre: "XI Encuentro Internacional de Profesorados de Enseñanza Superior, Media y Primaria en Ciencias Naturales y Matemática",
+        fecha:{a:2017,m:11,d:24,h:", de 10:30hs a 13:00hs"},
+        rol: {taller: "Electrónica"}
+      },{
+        nombre: "XII Encuentro Internacional de Profesorados de Enseñanza Superior, Media y Primaria en Ciencias Naturales, Matemática y Tecnología",
+        fecha:{a:2018,m:11,d:23,h:", de 9:30hs a 12:00hs"},
+        rol: {taller: "Electrónica"}
+      },{
+        nombre: "XIII Encuentro Internacional de Profesorados de Enseñanza Superior, Media y Primaria en Ciencias Naturales, Matemática y Tecnología",
+        fecha:{a:2019,m:11,d:22,h:", de 9:00hs a 11:30hs"},
+        rol: {taller: "Programación"}
+      },{
+        nombre: "XVI Encuentro Internacional de Profesorados de Enseñanza Superior, Media y Primaria en Ciencias Naturales, Matemática y Tecnología",
+        fecha:{a:2022,m:11,d:18,h:", de 9:30hs a 12:00hs"},
+        rol: {taller: "Electrónica"}
+      },{
+        nombre: "XVII Encuentro Internacional de Profesorados de Enseñanza Superior, Media y Primaria en Ciencias Naturales, Matemática y Tecnología",
+        fecha:{a:2023,m:11,d:17,h:", de 9:00hs a 11:00hs"},
+        rol: {taller: "Problemas"}
+      }]
+    },
+    FdL:{
+      instancias:[{
+        nombre: "19$^{\\circ}$ Foro Internacional de Enseñanza de Ciencias y Tecnologías",
+        fecha: {a:2019,m:4,d:29,h:", de 10:30hs a 12:30hs"},
+        rol: {taller: "Problemas"}
+      },{
+        nombre: "20$^{\\circ}$ Foro Internacional de Enseñanza de Ciencias y Tecnologías",
+        fecha: {a:2022,m:5,d:9,h:", de 10:30hs a 12:30hs"},
+        rol: {taller: "Problemas"}
+      }]
+    },
+    LUDOVER:{
+      nombre: "Taller de Videojuegos Ludover",
+      instancias:[{
+        edición: "edición virtual 2021"
+      },{
+        edición: "edición virtual 2022"
+      }]
+    }
+  },
+  extension: [
+
+  ],
   investigacion: [
     { // Proyecto UBACyT 2018
       nombre: "UBACyT 2018 Mod II GF, Estudiante, Programación científica 2018-2019",
@@ -374,6 +462,18 @@ const todos_mis_datos = {
   ]
 };
 
+const elementos_docentes_otros = [];
+for (let k of ["SdEC","EC","FdL"/*,"LUDOVER"*/]) {
+  let data = todos_mis_datos.extends_rep[k];
+  for (let i of data.instancias) {
+    let elemento = Object.assign({}, i);
+    if ('nombre' in data && !('nombre' in elemento)) {
+      elemento.nombre = data.nombre;
+    }
+    elementos_docentes_otros.push(elemento);
+  }
+}
+
 const obtenerLcencias = function() {
   return "\n  \\begin{itemize}\n    \\item 01/08/2023 - 29/02/2024\n  \\end{itemize}\n"
 };
@@ -389,6 +489,26 @@ const esUnProyecto = function(elemento) {
 const esUnCongreso = function(elemento) {
   return 'en' in elemento && 'rol' in elemento && 'fecha' in elemento;
 };
+
+const ordenFechas = function(elemento1, elemento2) {
+  let año1 = elemento1.fecha.a;
+  let año2 = elemento2.fecha.a;
+  if (año1 == año2) {
+    let mes1 = elemento1.fecha.m;
+    let mes2 = elemento2.fecha.m;
+    if (mes1 == mes2) {
+      let dia1 = elemento1.fecha.d;
+      if (Array.isArray(dia1)) { dia1 = dia1[0]; }
+      let dia2 = elemento2.fecha.d;
+      if (Array.isArray(dia2)) { dia2 = dia2[0]; }
+      return dia1 - dia2;
+    }
+    return mes1 - mes2;
+  }
+  return año1 - año2;
+}
+
+elementos_docentes_otros.sort(ordenFechas);
 
 const modelos = {
   exactas:{
@@ -407,20 +527,27 @@ const modelos = {
       },
       { nombre:"docentes.tex",
         esqueleto: {
-          modeloElemento: function(elemento) {
-            const cargo = procesarCargo(elemento);
-            const materia = procesarMateria(elemento);
-            const institucion = procesarInstitucion(elemento);
-            const tiempo = procesarTiempo(elemento);
-            return `      \\WorkEntry{\\textbf{${cargo}} ${materia}}\n      {${institucion}}\n      {${tiempo}}`;
-          },
           secciones:[
-            {letra:'a', nombre:'Universitarios'/*, filtro: x => {
-              return ["DC","Unipe","UNQ","Unahur"].includes(x.en);
-            }*/, elementos: todos_mis_datos.docentes},
+            {letra:'a', nombre:'Universitarios', elementos: todos_mis_datos.docentes,
+              modeloElemento: function(elemento) {
+                const cargo = procesarCargo(elemento);
+                const materia = procesarMateria(elemento);
+                const institucion = procesarInstitucion(elemento);
+                const tiempo = procesarTiempo(elemento);
+                return `      \\WorkEntry{\\textbf{${cargo}} ${materia}}\n      {${institucion}.}\n      {${tiempo}}`;
+              }
+            },
             {letra:'b', nombre:'En otros niveles educativos', elementos:[]},
             {letra:'c', nombre:'Formación pedagogica', elementos:[]},
-            {letra:'d', nombre:'Otras actividades docentes', elementos:[]}
+            {letra:'d', nombre:'Otras actividades docentes', elementos:elementos_docentes_otros,
+              modeloElemento: function(elemento) {
+                const nombre = procesarNombre(elemento);
+                const edición = procesarEdición(elemento);
+                const rol = procesarRol(elemento);
+                const fecha = procesarFecha(elemento.fecha);
+                return `      \\WorkEntry{\\textbf{${nombre}}${edición}}\n      {${rol}}\n      {${fecha}}`;
+              }
+            }
           ]
         }
       },
@@ -434,7 +561,7 @@ const modelos = {
                 const nombre = procesarNombre(elemento);
                 const en = procesarEn(elemento);
                 const autores = procesarAutores(elemento);
-                return `      \\WorkEntry{${anio} \\textbf{${nombre}}}\n      {${autores}}\n      {${en}}`;
+                return `      \\WorkEntry{${anio} \\textbf{${nombre}}}\n      {${autores}.}\n      {${en}}`;
               }
             },
             {letra:'b', nombre:'Participación en congresos o acontecimientos nacionales o internacionales',
@@ -457,7 +584,7 @@ const modelos = {
                 if (info.length > 0) {
                   info = `\n      {${info}}`;
                 }
-                return `      \\WorkEntry{\\textbf{${nombre}}}\n      {Código ${código}}\n      {${título}}${info}`;
+                return `      \\WorkEntry{\\textbf{${nombre}}}\n      {Código ${código}.}\n      {${título}}${info}`;
               }
             },
             {letra:'e', nombre:'Cursos de Posgrado no incluidos en la carrera de Doctorado.', elementos:[]},
@@ -475,7 +602,7 @@ const modelos = {
         contenido.push(modeloElemento(elemento));
       }
       if (contenido.length == 0) {
-        contenido = "    \\\\ No corresponde";
+        contenido = "    \\\\ No corresponde.";
       } else {
         contenido = `\n    \\begin{itemize}[leftmargin=0.2cm]\n\n${contenido.join("\n\n")}\n\n    \\end{itemize}`;
       }
@@ -547,11 +674,39 @@ const procesarInstitucion = function(elemento) {
 };
 
 const procesarRol = function(elemento) {
-  return elemento.rol;
+  if (typeof elemento.rol === 'string') {
+    return `${elemento.rol}.`;
+  }
+  let roles = [];
+  for (let k of Object.keys(elemento.rol)) {
+    let actividades = elemento.rol[k];
+    if (!Array.isArray(actividades)) {
+      actividades = [actividades];
+    }
+    if (k in claves) {
+      actividades = actividades.map(x => `\\textbf{${x in claves[k] ? claves[k][x] : x}}`);
+    }
+    if (actividades.length > 1) {
+      let ultimo = actividades.splice(-1)[0];
+      actividades = `${claves.roles[`${k}_s`]} ${actividades.join(", ")} y ${ultimo}.`;
+    } else {
+      actividades = `${claves.roles[k]} ${actividades[0]}.`;
+    }
+    roles.push(actividades);
+  }
+  if (roles.length == 1) {
+    return roles[0];
+  } else {
+    return `\\begin{itemize}\n${roles.map(x => `      \\item ${x}`).join("\n")}\\end{itemize}`
+  }
+};
+
+const procesarEdición = function(elemento) {
+  return 'edición' in elemento ? ` ${elemento.edición}` : "";
 };
 
 const procesarFecha = function(elemento) {
-  let resultado = `${elemento.a}`;
+  let resultado = `${elemento.a}.`;
   if ('m' in elemento) {
     resultado = `${mes(elemento.m)} de ${resultado}`;
   }
@@ -594,7 +749,7 @@ const procesarInfo = function(elemento) {
     if (!Array.isArray(info)) {
       info = [info];
     }
-    info = info.join("\\\\\n      ");
+    info = info.map(x => `${x}.`).join("\\\\\n      ");
     return info;
   }
   return "";
@@ -647,7 +802,7 @@ const procesarEn = function(elemento) {
         return x;
       }
     });
-    return en.join("\\\\\n      ");
+    return en.map(x => `${x}.`).join("\\\\\n      ");
   }
   return "?";
 };
