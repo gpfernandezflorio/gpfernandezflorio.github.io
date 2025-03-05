@@ -49,9 +49,14 @@ const todos_mis_datos = {
     { // 2020 Tesis de Licenciatura
       nombre: "Estimación de la Veracidad de Expresiones Faciales utilizando Aprendizaje Profundo",
       año: 2020,
-      en: ["Tesis de Licenciatura para la carrera Licenciatura en Ciencias de la Computación", "Facultad de Ciencias Exactas y Naturales, UBA"],
-      url: "https://gestion.dc.uba.ar/media/academic/grade/thesis/TesisGonzaloFernadez_eXcX1PK.pdf",
-      más: ["\\textbf{Directora}: María Elena Buemi", "\\textbf{Jurados}: Enrique Segura y Daniel Acevedo"]
+      autores: "YO",
+      en: [
+        "\\textbf{Tesis de Licenciatura} para la carrera Licenciatura en Ciencias de la Computación",
+        "Facultad de Ciencias Exactas y Naturales, UBA",
+        "\\textbf{Directora}: María Elena Buemi",
+        "\\textbf{Jurados}: Enrique Segura y Daniel Acevedo"
+      ],
+      url: "https://gestion.dc.uba.ar/media/academic/grade/thesis/TesisGonzaloFernadez_eXcX1PK.pdf"
     },
     { // 2020 ICPR Tesis
       nombre: "Attribute classification for the analysis of genuineness of facial expressions",
@@ -170,7 +175,7 @@ const todos_mis_datos = {
       cargo: "Ay2",
       materia: "Organización del Computador II",
       en: "DC",
-      durante: [{a:2016, c:2},{a:2016, c:2}]
+      durante: [{a:2016, c:2},{a:2019, c:1}]
     },
     { // Ay2 LyC 2016 2C
       cargo: "Ay2",
@@ -187,7 +192,7 @@ const todos_mis_datos = {
     },
     { // B1 2017 2C + 2018 2C + 2019 2C
       cargo: "ah",
-      materia: "La programación y su Didáctica",
+      curso: "La programación y su Didáctica",
       en: "DC",
       durante: [{a:2017, c:2},{a:2018, c:2},{a:2019, c:2}]
     },
@@ -212,7 +217,7 @@ const todos_mis_datos = {
     },
     { // B2 2019 2C
       cargo: {eq:"Ay2"},
-      materia: "La programación y su Didáctica 2",
+      curso: "La programación y su Didáctica 2",
       en: "DC",
       durante: {a:2019, c:1}
     },
@@ -280,31 +285,233 @@ const obtenerLcencias = function() {
   return "\n  \\begin{itemize}\n    \\item 01/08/2023 - 29/02/2024\n  \\end{itemize}\n"
 };
 
-const archivos = {
-  exactas:[
-    { nombre:"datos_del_aspirante.tex",
-      base:"exactas/template/datos_del_aspirante.tex",
-      reemplazos:[
-        {i:"No se tuvo ninguna licencia.", o:obtenerLcencias},
-        {i:"% \\newcommand{\\firma}", o:"\\newcommand{\\firma}"},
-        {i:"{\\escalaFirmaPrincipal}{0.05}",o:"{\\escalaFirmaPrincipal}{0.1}"},
-        {i:"{\\escalaFirmaCadaCarilla}{0.16}",o:"{\\escalaFirmaCadaCarilla}{0.06}"}
-      ]
+const modelos = {
+  exactas:{
+    esqueleto: function(contenido) {
+      return `\\begin{enumerate}[leftmargin=0.8cm]\n\n${contenido}\n\n\\end{enumerate}`;
+    },
+    archivos:[
+      { nombre:"datos_del_aspirante.tex",
+        base:"exactas/template/datos_del_aspirante.tex",
+        reemplazos:[
+          {i:"No se tuvo ninguna licencia.", o:obtenerLcencias},
+          {i:"% \\newcommand{\\firma}", o:"\\newcommand{\\firma}"},
+          {i:"{\\escalaFirmaPrincipal}{0.05}",o:"{\\escalaFirmaPrincipal}{0.1}"},
+          {i:"{\\escalaFirmaCadaCarilla}{0.16}",o:"{\\escalaFirmaCadaCarilla}{0.06}"}
+        ]
+      },
+      { nombre:"docentes.tex",
+        modeloElemento: function(elemento) {
+          const cargo = procesarCargo(elemento);
+          const materia = procesarMateria(elemento);
+          const institucion = procesarInstitucion(elemento);
+          const tiempo = procesarTiempo(elemento);
+          return `      \\WorkEntry{\\textbf{${cargo}} ${materia}}\n      {${institucion}}\n      {${tiempo}}`;
+        },
+        esqueleto: {
+          secciones:[
+            {letra:'a', nombre:'Universitarios'/*, filtro: x => {
+              return ["DC","Unipe","UNQ","Unahur"].includes(x.en);
+            }*/, elementos: todos_mis_datos.docentes},
+            {letra:'b', nombre:'En otros niveles educativos', elementos:[]},
+            {letra:'c', nombre:'Formación pedagogica', elementos:[]},
+            {letra:'d', nombre:'Otras actividades docentes', elementos:[]}
+          ]
+        }
+      },
+      { nombre:"cientificos.tex",
+        modeloElemento: function(elemento) {
+          const anio = procesarAnio(elemento);
+          const nombre = procesarNombre(elemento);
+          const en = procesarEn(elemento);
+          const autores = procesarAutores(elemento);
+          return `      \\WorkEntry{${anio} \\textbf{${nombre}}}\n      {${autores}}\n      {${en}}`;
+        },
+        esqueleto: {
+          secciones:[
+            {letra:'a', nombre:'Trabajos Publicados',
+              elementos: todos_mis_datos.investigacion
+            },
+            {letra:'b', nombre:'Participación en congresos o acontecimientos nacionales o internacionales',
+              elementos:[]
+            },
+            {letra:'c', nombre:'Formación de Recursos Humanos.', elementos:[]},
+            {letra:'d', nombre:'Participación en Proyectos de Investigación', elementos:[]},
+            {letra:'e', nombre:'Cursos de Posgrado no incluidos en la carrera de Doctorado.', elementos:[]},
+            {letra:'f', nombre:'Otros antecedentes científicos no considerados en los puntos anteriores', elementos:[]}
+          ]
+        }
+      }
+    ],
+    modeloSeccion: function(dataSeccion, dataArchivo) {
+      let contenido = [];
+      const elementos = 'elementos' in dataSeccion ? dataSeccion.elementos : dataArchivo.elementos;
+      const filtroSeccion = 'filtro' in dataSeccion ? dataSeccion.fitro : x => true;
+      for (let elemento of elementos.filter(filtroSeccion)) {
+        contenido.push(dataArchivo.modeloElemento(elemento));
+      }
+      if (contenido.length == 0) {
+        contenido = "    \\\\ No corresponde";
+      } else {
+        contenido = `\n    \\begin{itemize}[leftmargin=0.2cm]\n\n${contenido.join("\n\n")}\n\n    \\end{itemize}`;
+      }
+      return `  \\item[${dataSeccion.letra})]{${dataSeccion.nombre}\n${contenido}\n  }`;
     }
-  ],
-  general:[]
+  },
+  general:{archivos:[]}
 };
 
-const procesarArchivo = function(dataArchivo) {
-  if ('base' in dataArchivo && 'reemplazos' in dataArchivo) {
+const procesarArchivo = function(dataArchivo, base) {
+  if ('base' in dataArchivo) {
     let contenido = leerArchivo(dataArchivo.base);
-    for (let r of dataArchivo.reemplazos) {
-      let sobreEscribir = typeof r.o == 'string' ? r.o : (typeof r.o == 'function' ? r.o() : '?');
-      contenido = contenido.replaceAll(r.i, sobreEscribir);
+    if ('reemplazos' in dataArchivo) {
+      for (let r of dataArchivo.reemplazos) {
+        let sobreEscribir = typeof r.o == 'string' ? r.o : (typeof r.o == 'function' ? r.o() : '?');
+        contenido = contenido.replaceAll(r.i, sobreEscribir);
+      }
     }
     escribirArchivo(dataArchivo.nombre, contenido);
+  } else if ('esqueleto' in dataArchivo && 'esqueleto' in modelos[base]) {
+    let contenido = [];
+    const modeloSeccion = 'modeloSeccion' in dataArchivo.esqueleto ? dataArchivo.esqueleto.modeloSeccion : modelos[base].modeloSeccion;
+    for (let seccion of dataArchivo.esqueleto.secciones) {
+      contenido.push(modeloSeccion(seccion, dataArchivo));
+    }
+    escribirArchivo(dataArchivo.nombre, modelos[base].esqueleto(contenido.join("\n\n")));
   }
   return 0;
+};
+
+const procesarCargo = function(elemento) {
+  if ('cargo' in elemento) {
+    if (typeof elemento.cargo === 'string') {
+      if (elemento.cargo in claves.cargo) {
+        return claves.cargo[elemento.cargo];
+      }
+      return elemento.cargo;
+    }
+    if ('eq' in elemento.cargo) {
+      return `Docente\\textnormal{ (equiparado a ${procesarCargo({cargo:elemento.cargo.eq})})}`;
+    }
+  }
+  return "?";
+};
+
+const procesarMateria = function(elemento) {
+  if ('materia' in elemento) {
+    if (typeof elemento.materia === 'string') {
+      return `en la materia \\textbf{${elemento.materia}}`;
+    }
+  } else if ('curso' in elemento) {
+    if (typeof elemento.curso === 'string') {
+      return `en el curso \\textbf{${elemento.curso}}`;
+    }
+  }
+  return "?";
+};
+
+const procesarInstitucion = function(elemento) {
+  if ('en' in elemento) {
+    if (typeof elemento.en === 'string') {
+      if (elemento.en in claves.en) {
+        return claves.en[elemento.en];
+      }
+      return elemento.en;
+    }
+  }
+  return "?";
+};
+
+const procesarTiempo = function(elemento) {
+  if ('durante' in elemento) {
+    periodos = elemento.durante;
+    if (!Array.isArray(periodos)) {
+      periodos = [periodos];
+    }
+    periodos = periodos.map(procesarPeriodo);
+    if (periodos.length > 1) {
+      let ultimo = periodos.splice(-1)[0];
+      return `Durante ${periodos.join(", ")} y ${ultimo}.`;
+    } else {
+      return `Durante ${periodos[0]}.`;
+    }
+  } else if ('desde' in elemento) {
+    let desde = procesarPeriodo(elemento.desde);
+    if ('hasta' in elemento) {
+      let hasta = procesarPeriodo(elemento.hasta);
+      return `Entre ${desde} y ${hasta}.`;
+    } else {
+      return `Desde ${desde}.`;
+    }
+  }
+  return "?";
+};
+
+const procesarAnio = function(elemento) {
+  return elemento.año;
+};
+
+const procesarNombre = function(elemento) {
+  return elemento.nombre;
+};
+
+const procesarEn = function(elemento) {
+  if ('en' in elemento) {
+    en = elemento.en;
+    if (!Array.isArray(en)) {
+      en = [en]
+    }
+    en = en.map(x => {
+      if (typeof x === 'string') {
+        if (x in claves.en) {
+          return claves.en[x];
+        }
+        return x;
+      }
+    });
+    return en.join("\\\\\n      ");
+  }
+  return "?";
+};
+
+const procesarAutores = function(elemento) {
+  if ('autores' in elemento) {
+    let autores = elemento.autores;
+    if (!Array.isArray(autores)) {
+      autores = [autores];
+    }
+    autores = autores.map(x => x in claves.autores ? claves.autores[x] : x);
+    if (autores.length > 1) {
+      let ultimo = autores.splice(-1)[0];
+      return `${autores.join(", ")} y ${ultimo}`;
+    } else {
+      return `${autores[0]}`;
+    }
+  }
+};
+
+const procesarPeriodo = function(periodo) {
+  if (typeof periodo === 'number') {
+    return `${periodo}`;
+  } else {
+    let resultado = `${periodo.a}`;
+    if ('m' in periodo) {
+      resultado = `${mes(periodo.m)} de ${resultado}`;
+    } else if ('c' in periodo) {
+      resultado = `${cuatrimestre(periodo.c)} de ${resultado}`;
+    }
+    return resultado;
+  }
+};
+
+const mes = function(m) {
+  return [
+    "Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+  ][m-1];
+};
+
+const cuatrimestre = function(c) {
+  return `el ${c==1 ? 'primer' : (c==2 ? 'segundo' : "?")} cuatrimestre`;
 };
 
 const leerArchivo = function(ruta) {
@@ -328,8 +535,8 @@ const main = function(args) {
   Modelo.Base = args.includes('exactas') ? "exactas" : "general";
   Modelo.DST = rutaDestino(args);
   
-  for (let archivo of archivos[Modelo.Base]) {
-    if (procesarArchivo(archivo) != 0) {
+  for (let archivo of modelos[Modelo.Base].archivos) {
+    if (procesarArchivo(archivo, Modelo.Base) != 0) {
       return 1;
     }
   }

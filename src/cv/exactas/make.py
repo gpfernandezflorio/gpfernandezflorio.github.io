@@ -3,6 +3,7 @@ import shutil
 
 carpeta_tmp = "tmp"
 carpeta_template = "template"
+carpeta_node = "output_node"
 src_template = [
   "Makefile",
   "concursos.tex",
@@ -10,22 +11,27 @@ src_template = [
 ]
 src_yo = [
   "firma.jpg",
-  "datos_del_aspirante.tex",
-  "docentes.tex",
-  "cientificos.tex",
   "extension.tex",
   "profesionales.tex",
   "calificaciones.tex",
   "otros.tex"
+]
+src_node = [
+  "datos_del_aspirante.tex",
+  "docentes.tex",
+  "cientificos.tex",
 ]
 
 def main():
   if os.path.isdir(carpeta_tmp):
     shutil.rmtree(carpeta_tmp)
   os.mkdir(carpeta_tmp)
+  if os.path.isdir(carpeta_node):
+    shutil.rmtree(carpeta_node)
+  os.mkdir(carpeta_node)
 
   os.chdir("..")
-  if os.system("node datos.js exactas dst:exactas") != 0:
+  if os.system("node datos.js exactas dst:exactas/" + carpeta_node) != 0:
     fail("No se generaron los archivos de datos (node datos.js)")
   os.chdir("exactas")
 
@@ -40,6 +46,12 @@ def main():
       shutil.copy2(f, carpeta_tmp)
     else:
       fail("Falta el archivo " + f + " en esta carpeta")
+
+  for f in src_node:
+    if os.path.isfile(os.path.join(carpeta_node, f)):
+      shutil.copy2(os.path.join(carpeta_node, f), carpeta_tmp)
+    else:
+      fail("Falta el archivo " + f + " en la carpeta " + carpeta_node)
 
   os.chdir(carpeta_tmp)
   os.system("make")
