@@ -31,7 +31,7 @@ def main():
   os.mkdir(carpeta_node)
 
   os.chdir("..")
-  if os.system("node datos.js exactas dst:exactas/" + carpeta_node) != 0:
+  if os.system("node generador.js exactas dst:exactas/" + carpeta_node) != 0:
     fail("No se generaron los archivos de datos (node datos.js)")
   os.chdir("exactas")
 

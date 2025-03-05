@@ -1,18 +1,4 @@
-/*
-  Argumentos opcionales:
-
-    - Modelo de cv (uno de los siguientes)
-      general : Genérico (default)
-      exactas : Formulario de concursos para Exactas
-    
-    - Destino de los archivos generados (ruta relativa) (default: ruta actual)
-      dst:<RUTA>
-*/
-
-const Archivo = require('node:fs');
-const Modelo = {};
-
-const claves = {
+export const claves = {
   cargo:{
     Ay2: "Ayudante de Segunda",
     Ay1: "Ayudante de Primera",
@@ -58,7 +44,7 @@ const claves = {
   }
 };
 
-const todos_mis_datos = {
+export const todos_mis_datos = {
   extends_rep: { // Actividades que se repiten
     SdEC:{
       nombre: "Semana de la Enseñanza de las Ciencias",
@@ -462,35 +448,19 @@ const todos_mis_datos = {
   ]
 };
 
-const elementos_docentes_otros = [];
-for (let k of ["SdEC","EC","FdL"/*,"LUDOVER"*/]) {
-  let data = todos_mis_datos.extends_rep[k];
-  for (let i of data.instancias) {
-    let elemento = Object.assign({}, i);
-    if ('nombre' in data && !('nombre' in elemento)) {
-      elemento.nombre = data.nombre;
-    }
-    elementos_docentes_otros.push(elemento);
-  }
-}
-
-const obtenerLcencias = function() {
-  return "\n  \\begin{itemize}\n    \\item 01/08/2023 - 29/02/2024\n  \\end{itemize}\n"
-};
-
-const esUnaPublicacion = function(elemento) {
+export const esUnaPublicacion = function(elemento) {
   return 'en' in elemento && 'año' in elemento && 'autores' in elemento;
 };
 
-const esUnProyecto = function(elemento) {
+export const esUnProyecto = function(elemento) {
   return 'título' in elemento && 'código' in elemento;
 };
 
-const esUnCongreso = function(elemento) {
+export const esUnCongreso = function(elemento) {
   return 'en' in elemento && 'rol' in elemento && 'fecha' in elemento;
 };
 
-const ordenFechas = function(elemento1, elemento2) {
+export const ordenFechas = function(elemento1, elemento2) {
   let año1 = elemento1.fecha.a;
   let año2 = elemento2.fecha.a;
   if (año1 == año2) {
@@ -508,132 +478,7 @@ const ordenFechas = function(elemento1, elemento2) {
   return año1 - año2;
 }
 
-elementos_docentes_otros.sort(ordenFechas);
-
-const modelos = {
-  exactas:{
-    esqueleto: function(contenido) {
-      return `\\begin{enumerate}[leftmargin=0.8cm]\n\n${contenido}\n\n\\end{enumerate}`;
-    },
-    archivos:[
-      { nombre:"datos_del_aspirante.tex",
-        base:"exactas/template/datos_del_aspirante.tex",
-        reemplazos:[
-          {i:"No se tuvo ninguna licencia.", o:obtenerLcencias},
-          {i:"% \\newcommand{\\firma}", o:"\\newcommand{\\firma}"},
-          {i:"{\\escalaFirmaPrincipal}{0.05}",o:"{\\escalaFirmaPrincipal}{0.1}"},
-          {i:"{\\escalaFirmaCadaCarilla}{0.16}",o:"{\\escalaFirmaCadaCarilla}{0.06}"}
-        ]
-      },
-      { nombre:"docentes.tex",
-        esqueleto: {
-          secciones:[
-            {letra:'a', nombre:'Universitarios', elementos: todos_mis_datos.docentes,
-              modeloElemento: function(elemento) {
-                const cargo = procesarCargo(elemento);
-                const materia = procesarMateria(elemento);
-                const institucion = procesarInstitucion(elemento);
-                const tiempo = procesarTiempo(elemento);
-                return `      \\WorkEntry{\\textbf{${cargo}} ${materia}}\n      {${institucion}.}\n      {${tiempo}}`;
-              }
-            },
-            {letra:'b', nombre:'En otros niveles educativos', elementos:[]},
-            {letra:'c', nombre:'Formación pedagogica', elementos:[]},
-            {letra:'d', nombre:'Otras actividades docentes', elementos:elementos_docentes_otros,
-              modeloElemento: function(elemento) {
-                const nombre = procesarNombre(elemento);
-                const edición = procesarEdición(elemento);
-                const rol = procesarRol(elemento);
-                const fecha = procesarFecha(elemento.fecha);
-                return `      \\WorkEntry{\\textbf{${nombre}}${edición}}\n      {${rol}}\n      {${fecha}}`;
-              }
-            }
-          ]
-        }
-      },
-      { nombre:"cientificos.tex",
-        esqueleto: {
-          elementos: todos_mis_datos.investigacion,
-          secciones:[
-            {letra:'a', nombre:'Trabajos Publicados', filtro:esUnaPublicacion,
-              modeloElemento: function(elemento) {
-                const anio = procesarAño(elemento);
-                const nombre = procesarNombre(elemento);
-                const en = procesarEn(elemento);
-                const autores = procesarAutores(elemento);
-                return `      \\WorkEntry{${anio} \\textbf{${nombre}}}\n      {${autores}.}\n      {${en}}`;
-              }
-            },
-            {letra:'b', nombre:'Participación en congresos o acontecimientos nacionales o internacionales',
-              filtro:esUnCongreso,
-              modeloElemento: function(elemento) {
-                const nombre = procesarNombre(elemento);
-                const rol = procesarRol(elemento);
-                const fecha = procesarFecha(elemento.fecha);
-                const en = procesarEn(elemento);
-                return `      \\WorkEntry{${nombre}}\n      {${rol}}\n      {${fecha}}\n      {${en}}`;
-              }
-            },
-            {letra:'c', nombre:'Formación de Recursos Humanos.', elementos:[]},
-            {letra:'d', nombre:'Participación en Proyectos de Investigación', filtro:esUnProyecto,
-              modeloElemento: function(elemento) {
-                const nombre = procesarNombre(elemento);
-                const título = procesarTítulo(elemento);
-                const código = procesarCódigo(elemento);
-                let info = procesarInfo(elemento);
-                if (info.length > 0) {
-                  info = `\n      {${info}}`;
-                }
-                return `      \\WorkEntry{\\textbf{${nombre}}}\n      {Código ${código}.}\n      {${título}}${info}`;
-              }
-            },
-            {letra:'e', nombre:'Cursos de Posgrado no incluidos en la carrera de Doctorado.', elementos:[]},
-            {letra:'f', nombre:'Otros antecedentes científicos no considerados en los puntos anteriores', elementos:[]}
-          ]
-        }
-      }
-    ],
-    modeloSeccion: function(dataSeccion, esqueleto) {
-      let contenido = [];
-      const elementos = 'elementos' in dataSeccion ? dataSeccion.elementos : esqueleto.elementos;
-      const filtroSeccion = 'filtro' in dataSeccion ? dataSeccion.filtro : x => true;
-      const modeloElemento = 'modeloElemento' in dataSeccion ? dataSeccion.modeloElemento : esqueleto.modeloElemento;
-      for (let elemento of elementos.filter(filtroSeccion)) {
-        contenido.push(modeloElemento(elemento));
-      }
-      if (contenido.length == 0) {
-        contenido = "    \\\\ No corresponde.";
-      } else {
-        contenido = `\n    \\begin{itemize}[leftmargin=0.2cm]\n\n${contenido.join("\n\n")}\n\n    \\end{itemize}`;
-      }
-      return `  \\item[${dataSeccion.letra})]{${dataSeccion.nombre}\n${contenido}\n  }`;
-    }
-  },
-  general:{archivos:[]}
-};
-
-const procesarArchivo = function(dataArchivo, base) {
-  if ('base' in dataArchivo) {
-    let contenido = leerArchivo(dataArchivo.base);
-    if ('reemplazos' in dataArchivo) {
-      for (let r of dataArchivo.reemplazos) {
-        let sobreEscribir = typeof r.o == 'string' ? r.o : (typeof r.o == 'function' ? r.o() : '?');
-        contenido = contenido.replaceAll(r.i, sobreEscribir);
-      }
-    }
-    escribirArchivo(dataArchivo.nombre, contenido);
-  } else if ('esqueleto' in dataArchivo && 'esqueleto' in modelos[base]) {
-    let contenido = [];
-    const modeloSeccion = 'modeloSeccion' in dataArchivo.esqueleto ? dataArchivo.esqueleto.modeloSeccion : modelos[base].modeloSeccion;
-    for (let seccion of dataArchivo.esqueleto.secciones) {
-      contenido.push(modeloSeccion(seccion, dataArchivo.esqueleto));
-    }
-    escribirArchivo(dataArchivo.nombre, modelos[base].esqueleto(contenido.join("\n\n")));
-  }
-  return 0;
-};
-
-const procesarCargo = function(elemento) {
+export const procesarCargo = function(elemento) {
   if ('cargo' in elemento) {
     if (typeof elemento.cargo === 'string') {
       if (elemento.cargo in claves.cargo) {
@@ -648,7 +493,7 @@ const procesarCargo = function(elemento) {
   return "?";
 };
 
-const procesarMateria = function(elemento) {
+export const procesarMateria = function(elemento) {
   if ('materia' in elemento) {
     if (typeof elemento.materia === 'string') {
       return `en la materia \\textbf{${elemento.materia}}`;
@@ -661,7 +506,7 @@ const procesarMateria = function(elemento) {
   return "?";
 };
 
-const procesarInstitucion = function(elemento) {
+export const procesarInstitucion = function(elemento) {
   if ('en' in elemento) {
     if (typeof elemento.en === 'string') {
       if (elemento.en in claves.en) {
@@ -673,7 +518,7 @@ const procesarInstitucion = function(elemento) {
   return "?";
 };
 
-const procesarRol = function(elemento) {
+export const procesarRol = function(elemento) {
   if (typeof elemento.rol === 'string') {
     return `${elemento.rol}.`;
   }
@@ -701,11 +546,11 @@ const procesarRol = function(elemento) {
   }
 };
 
-const procesarEdición = function(elemento) {
+export const procesarEdición = function(elemento) {
   return 'edición' in elemento ? ` ${elemento.edición}` : "";
 };
 
-const procesarFecha = function(elemento) {
+export const procesarFecha = function(elemento) {
   let resultado = `${elemento.a}.`;
   if ('m' in elemento) {
     resultado = `${mes(elemento.m)} de ${resultado}`;
@@ -716,12 +561,12 @@ const procesarFecha = function(elemento) {
   return resultado;
 };
 
-const procesarDias = function(d) {
+export const procesarDias = function(d) {
   if (typeof d === 'number') {
     return `${d}`;
   }
   if (Array.isArray(d)) {
-    dias = d.map(procesarDias);
+    let dias = d.map(procesarDias);
     if (dias.length > 1) {
       let ultimo = dias.splice(-1)[0];
       return `${dias.join(", ")} y ${ultimo}`;
@@ -735,15 +580,15 @@ const procesarDias = function(d) {
   return "?";
 }
 
-const procesarTítulo = function(elemento) {
+export const procesarTítulo = function(elemento) {
   return elemento.título;
 };
 
-const procesarCódigo = function(elemento) {
+export const procesarCódigo = function(elemento) {
   return elemento.código;
 };
 
-const procesarInfo = function(elemento) {
+export const procesarInfo = function(elemento) {
   if ('info' in elemento) {
     let info = elemento.info;
     if (!Array.isArray(info)) {
@@ -755,9 +600,9 @@ const procesarInfo = function(elemento) {
   return "";
 };
 
-const procesarTiempo = function(elemento) {
+export const procesarTiempo = function(elemento) {
   if ('durante' in elemento) {
-    periodos = elemento.durante;
+    let periodos = elemento.durante;
     if (!Array.isArray(periodos)) {
       periodos = [periodos];
     }
@@ -780,17 +625,17 @@ const procesarTiempo = function(elemento) {
   return "?";
 };
 
-const procesarAño = function(elemento) {
+export const procesarAño = function(elemento) {
   return elemento.año;
 };
 
-const procesarNombre = function(elemento) {
+export const procesarNombre = function(elemento) {
   return elemento.nombre;
 };
 
-const procesarEn = function(elemento) {
+export const procesarEn = function(elemento) {
   if ('en' in elemento) {
-    en = elemento.en;
+    let en = elemento.en;
     if (!Array.isArray(en)) {
       en = [en]
     }
@@ -807,7 +652,7 @@ const procesarEn = function(elemento) {
   return "?";
 };
 
-const procesarAutores = function(elemento) {
+export const procesarAutores = function(elemento) {
   if ('autores' in elemento) {
     let autores = elemento.autores;
     if (!Array.isArray(autores)) {
@@ -823,7 +668,7 @@ const procesarAutores = function(elemento) {
   }
 };
 
-const procesarPeriodo = function(periodo) {
+export const procesarPeriodo = function(periodo) {
   if (typeof periodo === 'number') {
     return `${periodo}`;
   } else {
@@ -837,44 +682,12 @@ const procesarPeriodo = function(periodo) {
   }
 };
 
-const mes = function(m) {
+export const mes = function(m) {
   return [
     "Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
   ][m-1];
 };
 
-const cuatrimestre = function(c) {
+export const cuatrimestre = function(c) {
   return `el ${c==1 ? 'primer' : (c==2 ? 'segundo' : "?")} cuatrimestre`;
 };
-
-const leerArchivo = function(ruta) {
-  return Archivo.readFileSync(ruta, 'utf8');
-};
-
-const escribirArchivo = function(ruta, contenido) {
-  Archivo.writeFileSync(Modelo.DST + ruta, contenido);
-};
-
-const rutaDestino = function(args) {
-  let posiblesRutas = args.filter(x => x.startsWith("dst:"));
-  let ruta = posiblesRutas.length > 0 ? posiblesRutas[0].substring(4) : "./";
-  if (!ruta.endsWith("/")) {
-    ruta += "/";
-  }
-  return ruta;
-};
-
-const main = function(args) {
-  Modelo.Base = args.includes('exactas') ? "exactas" : "general";
-  Modelo.DST = rutaDestino(args);
-  
-  for (let archivo of modelos[Modelo.Base].archivos) {
-    if (procesarArchivo(archivo, Modelo.Base) != 0) {
-      return 1;
-    }
-  }
-
-  return 0;
-};
-
-process.exit(main(process.argv.slice(2)));
