@@ -11,13 +11,13 @@ src_template = [
 ]
 src_yo = [
   "firma.jpg",
-  "extension.tex",
   "profesionales.tex",
   "calificaciones.tex",
   "otros.tex"
 ]
 src_node = [
   "datos_del_aspirante.tex",
+  "extension.tex",
   "docentes.tex",
   "cientificos.tex",
 ]

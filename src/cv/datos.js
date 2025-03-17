@@ -9,10 +9,12 @@ export const claves = {
   en: {
     // Para docente y eventos
     DC:"Departamento de Computación (DC) - Facultad de Ciencias Exactas y Naturales (FCEyN) - Universidad de Buneos Aires (UBA)",
+    Exactas:"Facultad de Ciencias Exactas y Naturales (FCEyN) - Universidad de Buneos Aires (UBA)",
     Unahur:"Universidad Nacional de Hurlingham (UNaHur)",
     Unipe:"Universidad Pedagógica Nacional (UniPe)",
     UNQ:"Universidad Nacional de Quilmes (UNQ)",
     UNC:"Universidad Nacional de Córdoba (UNC)",
+    DQO:"Departamento de Química Orgánica (DQO) - Facultad de Ciencias Exactas y Naturales (FCEyN) - Universidad de Buneos Aires (UBA)",
     // Para investigación
     ICPR20:"International Conference on Pattern Recognition (ICPR) 2020",
     JADiCC21:"Jornadas Argentinas de Didáctica de las Ciencias de la Computación (JADiCC) 2021",
@@ -30,51 +32,240 @@ export const claves = {
     "CECI":"Cecilia Martínez"
   },
   roles: {
+    orga_: "Organización general",
     taller: "Dictado del taller",
-    taller_s: "Dictado de los talleres"
+    taller_s: "Dictado de los talleres",
+    expo_: "Expositor",
+    expo: "Expositor en el stand",
+    expo_s: "Expositor en los stands"
   },
   taller: {
+    "Intro":"Introducción a la Programación",
     "Problemas":"¿Cómo enseñar a programar? Una didáctica de la programación basada en la resolución de problemas",
     "Didáctica":"Taller de Didáctica de la Programación",
     "Electrónica":"Taller de Electrónica Aplicada",
     "Evaluación":"Taller de Evaluación",
     "Programación":"Taller de Programación y Robótica",
     "Robótica":"Taller de Robótica",
+    "Música":"Taller de Programación Musical",
+    "Animaciones":"Taller de Animaciones y Juegos",
     "Apps":"Taller de Aplicaciones Móviles para el Aula"
+  },
+  expo: {
+    "RPPT":"Robótica y Programación para Todxs"
   }
 };
 
 export const todos_mis_datos = {
   extends_rep: { // Actividades que se repiten
+    FMujer:{
+      nombre: "Feria del Día de la Mujer y la Niña en la Ciencia",
+      en:"Ciudad Universitaria",
+      instancias:[{
+        edición: 2023,
+        fecha:{a:2023,m:2,d:16,h:", de 9:00hs a 13:00hs"},
+        rol: {expo: ""}
+      },{
+        edición: 2024,
+        fecha:{a:2024,m:2,d:19,h:", de 9:00hs a 13:00hs"},
+        rol: {expo: ""}
+      }]
+    },
+    FdL:{
+      nombre: "Feria del Libro",
+      en: "Zona Explora - La Rural",
+      instancias:[{
+        edición: 2017,
+        fecha:{a:2017,m:5,d:7,h:", de 12:30hs a 17:30hs"},
+        rol: {expo: "Búsqueda Binaria"}
+      },{
+        edición: 2018,
+        fecha:{a:2018,m:5,d:13,h:", de 12:30hs a 17:30hs"},
+        rol: {expo: "Inteligencia Artificial"}
+      },{
+        edición: 2019,
+        fecha:{a:2019,m:5,d:12,h:", de 12:00hs a 17:00hs"},
+        rol: {taller: "Intro"}
+      },{
+        edición: 2022,
+        fecha:{a:2022,m:5,d:15,h:", de 12:00hs a 21:00hs"},
+        rol: {expo: ""}
+      },{
+        edición: 2023,
+        fecha:{a:2023,m:5,d:14,h:", de 13:00hs a 21:00hs"},
+        rol: {expo: ""}
+      },{
+        edición: 2024,
+        fecha:{a:2024,m:5,d:12,h:", de 12:30hs a 17:30hs"},
+        rol: {expo: ""}
+      }]
+    },
+    ForoFdL:{
+      instancias:[{
+        nombre: "19$^{\\circ}$ Foro Internacional de Enseñanza de Ciencias y Tecnologías",
+        fecha: {a:2019,m:4,d:29,h:", de 10:30hs a 12:30hs"},
+        rol: {taller: "Problemas"}
+      },{
+        nombre: "20$^{\\circ}$ Foro Internacional de Enseñanza de Ciencias y Tecnologías",
+        fecha: {a:2022,m:5,d:9,h:", de 10:30hs a 12:30hs"},
+        rol: {taller: "Problemas"}
+      }]
+    },
+    SdC:{
+      nombre: "Semana de la Computación",
+      instancias:[{
+        edición: 2014,
+        fecha:{a:2014,m:6,d:[17,18,19],h:", de 9:00hs a 16:00hs"},
+        rol: {expo: "Búsqueda Binaria"}
+      },{
+        edición: 2015,
+        fecha:{a:2015,m:6,d:[16,17,18],h:", de 9:00hs a 16:00hs"},
+        rol: {expo: "Búsqueda Binaria"}
+      },{
+        edición: 2016,
+        fecha:{a:2016,m:6,d:[28,29,30],h:", de 9:00hs a 16:00hs"},
+        rol: {expo: "Búsqueda Binaria", taller:"Robótica"}
+      },{
+        edición: 2017,
+        fecha:{a:2017,m:6,d:[13,14,15],h:", de 9:00hs a 16:00hs"},
+        rol: {orga:"", expo: "Búsqueda Binaria", taller:"Música"}
+      },{
+        edición: 2018,
+        fecha:{a:2018,m:6,d:[12,13,14],h:", de 9:00hs a 16:00hs"},
+        rol: {orga:"", taller:["Robótica","Música"]}
+      },{
+        edición: 2019,
+        fecha:{a:2019,m:6,d:[10,11,12],h:", de 9:00hs a 16:00hs"},
+        rol: {orga:"", taller:["Robótica","Música","Animaciones"], expo:""}
+      },{
+        nombre: "Semana de la Computación y las Ciencias de Datos",
+        edición: 2022,
+        fecha:{a:2022,m:10,d:[4,5,6],h:", de 9:00hs a 16:00hs"},
+        rol: {orga:""}
+      },{
+        nombre: "Semana de la Computación y las Ciencias de Datos",
+        edición: 2023,
+        fecha:{a:2023,m:9,d:[5,6,7],h:", de 9:00hs a 16:00hs"},
+        rol: {orga:""}
+      }]
+    },
     SdEC:{
       nombre: "Semana de la Enseñanza de las Ciencias",
       instancias:[{
-        edición: "2017",
+        edición: 2017,
         fecha:{a:2017,m:7,d:[13,14],h:", de 13:00hs a 15:30hs"},
         rol: {taller: ["Electrónica","Robótica"]}
       },{
-        edición: "2018",
+        edición: 2018,
         fecha:{a:2018,m:7,d:[10,11,12],h:", de 16:00hs a 18:30hs"},
         rol: {taller: ["Didáctica","Electrónica","Robótica"]}
       },{
-        edición: "2019",
+        edición: 2019,
         fecha:{a:2019,m:7,d:[10,11,12],h:", de 17:00hs a 19:30hs"},
         rol: {taller: ["Didáctica","Electrónica","Apps"]}
       },{
-        edición: "2022",
+        edición: 2022,
         fecha:{a:2022,m:7,d:[12,14],h:", de 10:00hs a 12:30hs"},
         rol: {taller: ["Didáctica","Electrónica"]}
       },{
-        edición: "2023",
+        edición: 2023,
         fecha:{a:2023,m:7,d:[11,12],h:", de 10:30hs a 13:00hs"},
         rol: {taller: ["Didáctica","Electrónica"]}
       },{
-        edición: "2024",
+        edición: 2024,
         fecha:{a:2024,m:7,d:[10,11,12],h:", de 10:30hs a 13:00hs"},
         rol: {taller: ["Didáctica","Electrónica","Evaluación"]}
       }]
     },
-    EC:{
+    DOV:{
+      pre: "Taller de Orientación Vocacional ",
+      nombre: "Aventuras Computacionales: Resolviendo Problemas con y sin Computadoras",
+      instancias:[{
+        desde: {a:2017,m:9,d:22,},
+        hasta: {a:2017,m:11,d:3,h:", de 14:00hs a 17:00hs"},
+        info:["7 encuentros de 3 horas cada uno"]
+      },{
+        desde: {a:2019,m:5,d:15,},
+        hasta: {a:2019,m:6,d:26,h:", de 14:00hs a 17:00hs"},
+        info:["8 encuentros de 3 horas cada uno"]
+      },{
+        edición: "(edición virtual)",
+        desde: {a:2020,m:10,d:13,},
+        hasta: {a:2020,m:11,d:3,h:", de 14:00hs a 16:00hs"},
+        info:["4 encuentros de 2 horas cada uno"]
+      },{
+        edición: "(edición virtual)",
+        desde: {a:2021,m:6,d:3,},
+        hasta: {a:2021,m:6,d:24,h:", de 14:00hs a 16:00hs"},
+        info:["4 encuentros de 2 horas cada uno"]
+      },{
+        desde: {a:2022,m:8,d:11,},
+        hasta: {a:2022,m:9,d:15,h:", de 14:00hs a 17:00hs"},
+        info:["6 encuentros de 3 horas cada uno"]
+      },{
+        nombre: "La `Magia' de la Computación: Resolviendo desafíos a través de la Programación",
+        desde: {a:2023,m:6,d:1,},
+        hasta: {a:2023,m:7,d:6,h:", de 14:00hs a 17:00hs"},
+        info:["5 encuentros de 3 horas cada uno"]
+      },{
+        desde: {a:2024,m:5,d:6,},
+        hasta: {a:2024,m:6,d:10,h:", de 14:00hs a 17:00hs"},
+        info:["6 encuentros de 3 horas cada uno"]
+      }]
+    },
+    FeriaProfesiones:{
+      pre: "Feria de Profesiones ",
+      nombre: "¿Para qué seguir estudiando?",
+      en: "Escuela Técnica de la UBA, Sede Lugano",
+      instancias:[{
+        edición: 2017,
+        fecha: {a:2017,m:9,d:23,h:", de 9:00hs a 14:00hs"},
+        rol: {expo: ""}
+      },{
+        edición: 2018,
+        fecha: {a:2018,m:9,d:29,h:", de 9:00hs a 14:00hs"},
+        rol: {expo: ""}
+      },{
+        edición: 2019,
+        fecha: {a:2019,m:9,d:28,h:", de 9:00hs a 14:00hs"},
+        rol: {expo: ""}
+      },{
+        edición: 2022,
+        fecha: {a:2022,m:10,d:15,h:", de 9:00hs a 14:00hs"},
+        rol: {expo: ""}
+      },{
+        edición: 2023,
+        fecha: {a:2023,m:10,d:28,h:", de 9:30hs a 13:00hs"},
+        rol: {expo: ""}
+      }]
+    },
+    PlazaCiencia:{
+      nombre: "Plaza Ciencia",
+      en: "Plaza San Justo, La Matanza",
+      instancias:[{
+        edición: 2017,
+        fecha: [
+          {a:2017,m:10,d:2,h:", de 10:00hs a 17:00hs"},
+          {a:2017,m:10,d:4,h:", de 10:00hs a 13:00hs"}
+        ],
+        rol: {expo: ""}
+      },{
+        edición: 2018,
+        fecha: [
+          {a:2018,m:10,d:1,h:", de 13:00hs a 17:00hs"},
+          {a:2018,m:10,d:6,h:", de 10:00hs a 15:00hs"}
+        ],
+        rol: {expo: ""}
+      },{
+        edición: 2019,
+        fecha: [
+          {a:2019,m:10,d:2,h:", de 13:00hs a 17:00hs"},
+          {a:2019,m:10,d:3,h:", de 10:00hs a 17:00hs"}
+        ],
+        rol: {expo: ""}
+      }]
+    },
+    EncuentroProfesorados:{
       instancias:[{
         nombre: "XI Encuentro Internacional de Profesorados de Enseñanza Superior, Media y Primaria en Ciencias Naturales y Matemática",
         fecha:{a:2017,m:11,d:24,h:", de 10:30hs a 13:00hs"},
@@ -97,28 +288,262 @@ export const todos_mis_datos = {
         rol: {taller: "Problemas"}
       }]
     },
-    FdL:{
+    NdlM:{
+      nombre: "La noche de la Ciencia",
+      en: "La Noche de los Museos",
       instancias:[{
-        nombre: "19$^{\\circ}$ Foro Internacional de Enseñanza de Ciencias y Tecnologías",
-        fecha: {a:2019,m:4,d:29,h:", de 10:30hs a 12:30hs"},
-        rol: {taller: "Problemas"}
+        edición: 2016,
+        fecha:{a:2016,m:10,d:29,h:", de 19:00hs a 3:00hs"},
+        rol: {expo: ["Generador de Anagramas","Morphing de Caras"]}
       },{
-        nombre: "20$^{\\circ}$ Foro Internacional de Enseñanza de Ciencias y Tecnologías",
-        fecha: {a:2022,m:5,d:9,h:", de 10:30hs a 12:30hs"},
-        rol: {taller: "Problemas"}
+        edición: 2017,
+        fecha:{a:2017,m:11,d:4,h:", de 19:00hs a 3:00hs"},
+        rol: {expo: ""}
+      },{
+        edición: 2018,
+        fecha:{a:2018,m:11,d:10,h:", de 19:00hs a 3:00hs"}
+      },{
+        edición: 2019,
+        fecha:{a:2019,m:11,d:2,h:", de 19:00hs a 3:00hs"}
+      },{
+        edición: 2022,
+        fecha:{a:2022,m:10,d:22,h:", de 19:00hs a 3:00hs"},
+        rol: {expo: ""}
+      },{
+        edición: 2023,
+        fecha:{a:2023,m:11,d:3,h:", de 19:00hs a 0:00hs"},
+        rol: {expo: ""}
+      },{
+        edición: 2024,
+        fecha:{a:2024,m:11,d:9,h:", de 18:00hs a 0:00hs"},
+        rol: {expo: "RPPT"}
+      }]
+    },
+    Cx1D:{
+      nombre: "Científic@s x 1 día",
+      instancias:[{
+        edición: 2016,
+        fecha:{a:2016,m:12,d:7,h:", de 14:00hs a 18:00hs"}
+      },{
+        edición: 2017,
+        fecha:{a:2017,m:12,d:14,h:", de 9:00hs a 18:00hs"}
+      },{
+        edición: 2018,
+        fecha:{a:2018,m:12,d:14,h:", de 9:00hs a 17:00hs"}
+      },{
+        edición: 2019,
+        fecha:{a:2019,m:12,d:17,h:", de 9:00hs a 17:00hs"}
+      },{
+        edición: 2022,
+        fecha:{a:2022,m:12,d:15,h:", de 9:00hs a 18:00hs"}
+      },{
+        edición: 2023,
+        fecha:{a:2023,m:12,d:14,h:", de 9:00hs a 18:00hs"}
+      },{
+        edición: 2024,
+        fecha:{a:2024,m:12,d:11,h:", de 9:00hs a 15:30hs"}
       }]
     },
     LUDOVER:{
       nombre: "Taller de Videojuegos Ludover",
       instancias:[{
-        edición: "edición virtual 2021"
+        edición: "edición virtual 2021",
+        desde: {a:2021,m:4,d:15},
+        hasta: {a:2021,m:7,d:15,h:", de 19:30 a 22:00"},
+        info:["14 encuentros de 2 horas y media cada uno"]
       },{
-        edición: "edición virtual 2022"
+        edición: "edición virtual 2022",
+        desde: {a:2022,m:6,d:9},
+        hasta: {a:2022,m:10,d:27,h:", de 19:00 a 21:00"},
+        info:["21 encuentros de 2 horas cada uno"]
+      }]
+    },
+    EVE:{
+      en: "La Escuela Viene a Exactas",
+      instancias:[{
+        nombre: "Taller de Programación y Robótica",
+        fecha: {a:2017,m:9,d:4,h:", de 14:00 a 16:00"}
+      },{
+        nombre: "Taller de Programación y Robótica",
+        fecha: {a:2017,m:10,d:20,h:", de 9:00 a 11:00"}
+      },{
+        nombre: "Taller de Programación y Robótica",
+        fecha: {a:2018,m:8,d:10,h:", de 10:00 a 12:00"}
+      },{
+        nombre: "Taller de Electrónica Aplicada",
+        fecha: {a:2019,m:10,d:24,h:", de 9:00 a 12:00"}
       }]
     }
   },
   extension: [
-
+    { // Bacterminador
+      nombre: "Bacterminador (UBANEX)",
+      descripción: "Desarrollo de videojuego educativo.",
+      en: "DQO",
+      desde: 2017,
+      hasta: 2019,
+      esUnProyecto: true
+    },
+    { // UBA XXII julio 2017
+      pre: "Feria de Ciencias ",
+      nombre: "¿Qué onda con la Ciencia?",
+      edición: "(UBA XXII)",
+      descripción: "Feria de ciencias en el marco del programa UBA XXII de educación en cárceles.",
+      en: "Penal de Devoto",
+      fecha: {a:2017,m:7,d:7,h:", de 9:00hs a 15:00hs"}
+    },
+    { // C3 julio 2017
+      nombre: "Hoy te Convertís en Superhéroe",
+      descripción: "Exposiciones demostrativas para público general.",
+      en: "Centro Cultural de la Ciencia (C3)",
+      fecha: {a:2017,m:7,d:[23,30],h:", de 16:00hs a 18:00hs"}
+    },
+    { // Ciencia Palooza marzo 2018
+      nombre: "Un Festival de Ciencia",
+      edición: "(ex Ciencia-Palooza)",
+      en: "Centro Cultural Conex",
+      descripción: "Exposiciones demostrativas para público general.",
+      fecha: {a:2018,m:3,d:29,h:" de 18:00hs a 21:00hs"}
+    },
+    { // Robótica en la Escuela
+      nombre: "Robótica en la Escuela (UBANEX)",
+      descripción: "Diseño de robots educativos, desarrollo de entorno de programación por bloques y dictado de talleres.",
+      en: "DC",
+      desde: 2018,
+      esUnProyecto: true
+    },
+    { // Arduino en la Escuela
+      nombre: "Arduino en la Escuela",
+      descripción: "Desarrollo de entorno de programación por bloques para Arduino.",
+      en: "DC",
+      desde: 2018,
+      esUnProyecto: true
+    },
+    { // Talleres CBC
+      nombre: "Talleres CBC (Programa de Tutorías CBC)",
+      descripción: "Dictado de talleres para estudiantes universitarios.",
+      en: "DC",
+      durante: 2018,
+      esUnProyecto: true
+    },
+    { // Talleres ComCom
+      nombre: "Talleres ComCom",
+      descripción: "Dictado de talleres para estudiantes universitarios.",
+      desde: 2018,
+      hasta: 2019,
+      esUnProyecto: true
+    },
+    { // Vocar agosto 2018
+      nombre: "Aventuras Computacionales",
+      descripción: "Actividad de divulgación científica.",
+      en: "Tecnópolis, Espacio VocAr",
+      fecha: {a:2018,m:8,d:16,h:", de 14:00hs a 15:30hs"}
+    },
+    { // Feria MateArte Científico octubre 2018
+      pre:"Feria de Ciencias ",
+      nombre: "Mate Arte Científico",
+      en: "Escuela N$^{\\circ}$ 15 Provincia de Santa Fé",
+      fecha: {a:2018,m:10,d:27,h:", de 15:00hs a 18:30hs"},
+      rol: {taller: "Intro"}
+    },
+    { // Robótica en el barrio (Longchamps)
+      nombre: "Robótica en el Barrio",
+      descripción: "Dictado de talleres para estudiantes de primaria y secundaria.",
+      en: "DC",
+      desde: {a:2019, m:3},
+      hasta: {a:2019, m:4},
+      info:["4 encuentros de 4 horas cada uno"],
+      esUnProyecto: true
+    },
+    { // CP 2 Junio 2019
+      nombre: "Ciencia Paliza 2",
+      descripción: "Exposiciones demostrativas para público general.",
+      en: "Parque Rivadavia",
+      fecha: {a:2019,m:6,d:1,h:", de 15:00hs a 18:00hs"},
+      rol: {expo: ""}
+    },
+    { // Feria Curioseando septiembre 2019
+      pre:"Feria de Ciencia y Arte ",
+      nombre: "Curioseando",
+      en: "Escuela N$^{\\circ}$ 22 Remedios de Escalada de San Martín",
+      fecha: {a:2019,m:9,d:28,h:", de 16:00hs a 19:00hs"},
+      rol: {expo: ""}
+    },
+    { // Vocar octubre 2019
+      nombre: "Aventuras Computacionales",
+      descripción: "Actividad de divulgación científica.",
+      en: "Tecnópolis, Espacio VocAr",
+      fecha: {a:2019,m:10,d:4,h:", de 11:00hs a 15:30hs"}
+    },
+    { // Proyecto Exactas en Tecnópolis
+      nombre: "Exactas en Tecnópolis",
+      descripción: "Actividad educativa en el espacio Imaginación.",
+      en: "Exactas",
+      desde: 2022,
+      hasta: 2023,
+      esUnProyecto: true
+    },
+    { // Feria +Ciencia +Futuro (San Martín)
+      nombre: "Feria +Ciencia +Futuro",
+      descripción: "Exposiciones demostrativas para público general.",
+      en: "San Martín",
+      fecha: {a:2023,m:10,d:7,h:", de 11:00hs a 17:00hs"},
+      rol: {expo: ""}
+    },
+    { // Feria Escuela Cullen noviembre 2023
+      nombre: "Feria de Ciencias",
+      en: "Escuela Primaria N$^{\\circ}$ 10 D. E. 10$^{\\circ}$ Joaquín M. Cullen",
+      fecha: {a:2023,m:11,d:11,h:", de 11:00hs a 16:00hs"},
+      rol: {expo: "RPPT"}
+    },
+    { // Feria Elijo Crecer
+      pre:"Feria de Ciencias ",
+      nombre: "Elijo Crecer",
+      en: "Parque Saavedra",
+      fecha: {a:2024,m:4,d:6,h:", de 14:00hs a 18:00hs"},
+      rol: {expo: ""}
+    },
+    { // Proyecto AelE + Unipe
+      nombre: "Domótica en la sociedad",
+      descripción: "Capacitación a estudiantes de profesorados universitarios para dictar talleres de Arduino en escuelas secundarias.",
+      en: "Unipe",
+      desde: {a:2024, c:2},
+      esUnProyecto: true
+    },
+    { // Feria CIDAC-UBA
+      nombre: "Feria de Ciencias",
+      descripción: "Exposiciones demostrativas para público general.",
+      en: "Centro de Innovación y Desarrollo para la Acción Comunitaria (CIDAC-UBA)",
+      fecha: {a:2024,m:8,d:23,h:", de 10:00hs a 14:30hs"},
+      rol: {expo: "RPPT"}
+    },
+    { // Feria Houssay
+      nombre: "Feria de Ciencias",
+      descripción: "Exposiciones demostrativas para público general.",
+      en: "Plaza Houssay",
+      fecha: {a:2024,m:11,d:15,h:", de 10:30hs a 17:00hs"},
+      rol: {expo: "RPPT"}
+    },
+    { // Expo Pilar
+      nombre: "Expo Educativa Pilar",
+      descripción: "Exposición de carreras universitarias.",
+      en: "Pilar",
+      fecha: {a:2024,m:11,d:1,h:", de 9:00hs a 17:00hs"},
+      rol: {expo: "Profesorado en Informática - Unipe"}
+    },
+    { // Noche de la Ciencia 2024 (2)
+      nombre: "La Noche de la Ciencia",
+      edición: "2024 (2)",
+      fecha: {a:2024,m:12,d:7,h:", de 20:00hs a 0:00hs"},
+      rol: {expo: "RPPT"}
+    },
+    { // REDA - ar
+      nombre: "Recursos Educativos Digitales Abiertos (FUNDACEN)",
+      descripción: "Generación de contenido digital educativo para docentes.",
+      en: "Exactas",
+      desde: {a:2025, c:1},
+      esUnProyecto: true
+    }
   ],
   investigacion: [
     { // Proyecto UBACyT 2018
@@ -452,24 +877,45 @@ export const esUnaPublicacion = function(elemento) {
   return 'en' in elemento && 'año' in elemento && 'autores' in elemento;
 };
 
-export const esUnProyecto = function(elemento) {
+export const esUnProyectoI = function(elemento) {
   return 'título' in elemento && 'código' in elemento;
+};
+
+export const esUnProyectoE = function(elemento) {
+  return 'esUnProyecto' in elemento && elemento.esUnProyecto === true;
 };
 
 export const esUnCongreso = function(elemento) {
   return 'en' in elemento && 'rol' in elemento && 'fecha' in elemento;
 };
 
+const fechaElemento = function(elemento) {
+  let fecha;
+  if ('fecha' in elemento) {
+    fecha = elemento.fecha;
+  } else if ('desde' in elemento) {
+    fecha = elemento.desde;
+  } else if ('durante' in elemento) {
+    fecha = elemento.durante;
+  } else {
+    fecha = {};
+  }
+  if (Array.isArray(fecha)) { fecha = fecha[0]; }
+  return Object.assign({a:1990,m:1,d:1}, fecha);
+};
+
 export const ordenFechas = function(elemento1, elemento2) {
-  let año1 = elemento1.fecha.a;
-  let año2 = elemento2.fecha.a;
+  let fecha1 = fechaElemento(elemento1);
+  let fecha2 = fechaElemento(elemento2);
+  let año1 = fecha1.a;
+  let año2 = fecha2.a;
   if (año1 == año2) {
-    let mes1 = elemento1.fecha.m;
-    let mes2 = elemento2.fecha.m;
+    let mes1 = fecha1.m;
+    let mes2 = fecha2.m;
     if (mes1 == mes2) {
-      let dia1 = elemento1.fecha.d;
+      let dia1 = fecha1.d;
       if (Array.isArray(dia1)) { dia1 = dia1[0]; }
-      let dia2 = elemento2.fecha.d;
+      let dia2 = fecha2.d;
       if (Array.isArray(dia2)) { dia2 = dia2[0]; }
       return dia1 - dia2;
     }
@@ -519,13 +965,18 @@ export const procesarInstitucion = function(elemento) {
 };
 
 export const procesarRol = function(elemento) {
+  if (!('rol' in elemento)) {
+    return "";
+  }
   if (typeof elemento.rol === 'string') {
     return `${elemento.rol}.`;
   }
   let roles = [];
   for (let k of Object.keys(elemento.rol)) {
     let actividades = elemento.rol[k];
-    if (!Array.isArray(actividades)) {
+    if (actividades.length == 0) {
+      actividades = [];
+    } else if (!Array.isArray(actividades)) {
       actividades = [actividades];
     }
     if (k in claves) {
@@ -534,15 +985,17 @@ export const procesarRol = function(elemento) {
     if (actividades.length > 1) {
       let ultimo = actividades.splice(-1)[0];
       actividades = `${claves.roles[`${k}_s`]} ${actividades.join(", ")} y ${ultimo}.`;
-    } else {
+    } else if (actividades.length == 1) {
       actividades = `${claves.roles[k]} ${actividades[0]}.`;
+    } else {
+      actividades = `${claves.roles[`${k}_`]}.`;
     }
     roles.push(actividades);
   }
   if (roles.length == 1) {
     return roles[0];
   } else {
-    return `\\begin{itemize}\n${roles.map(x => `      \\item ${x}`).join("\n")}\\end{itemize}`
+    return `${roles.map(x => `      $\\circ$ ${x}`).join("\\\\")}`;
   }
 };
 
@@ -551,12 +1004,25 @@ export const procesarEdición = function(elemento) {
 };
 
 export const procesarFecha = function(elemento) {
-  let resultado = `${elemento.a}.`;
-  if ('m' in elemento) {
-    resultado = `${mes(elemento.m)} de ${resultado}`;
-  }
-  if ('d' in elemento) {
-    resultado = `${procesarDias(elemento.d)} de ${resultado}`;
+  let resultado = "";
+  if (Array.isArray(elemento)) {
+    resultado = elemento.map(procesarFecha);
+    if (resultado.length == 1) {
+      return resultado[0];
+    }
+    let ultimo = resultado.splice(-1)[0];
+    return `${resultado.join(", ")} y ${ultimo}`;
+  } else {
+    if ('h' in elemento) {
+      resultado = elemento.h;
+    }
+    resultado = `${elemento.a}${resultado}.`;
+    if ('m' in elemento) {
+      resultado = `${mes(elemento.m)} de ${resultado}`;
+    }
+    if ('d' in elemento) {
+      resultado = `${procesarDias(elemento.d)} de ${resultado}`;
+    }
   }
   return resultado;
 };
@@ -601,6 +1067,9 @@ export const procesarInfo = function(elemento) {
 };
 
 export const procesarTiempo = function(elemento) {
+  if ('fecha' in elemento) {
+    return procesarFecha(elemento.fecha);
+  }
   if ('durante' in elemento) {
     let periodos = elemento.durante;
     if (!Array.isArray(periodos)) {
@@ -633,6 +1102,10 @@ export const procesarNombre = function(elemento) {
   return elemento.nombre;
 };
 
+export const procesarDescripción = function(elemento) {
+  return 'descripción' in elemento ? elemento.descripción : "";
+}
+
 export const procesarEn = function(elemento) {
   if ('en' in elemento) {
     let en = elemento.en;
@@ -649,7 +1122,7 @@ export const procesarEn = function(elemento) {
     });
     return en.map(x => `${x}.`).join("\\\\\n      ");
   }
-  return "?";
+  return "";
 };
 
 export const procesarAutores = function(elemento) {
@@ -681,6 +1154,10 @@ export const procesarPeriodo = function(periodo) {
     return resultado;
   }
 };
+
+export const procesarPre = function(elemento) {
+  return 'pre' in elemento ? elemento.pre : "";
+}
 
 export const mes = function(m) {
   return [
