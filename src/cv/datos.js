@@ -21,9 +21,13 @@ export const claves = {
     JADiCC22:"Jornadas Argentinas de Didáctica de las Ciencias de la Computación (JADiCC), 18-20 de agosto de 2022, Corrientes, Argentina",
     JADiCC23:"Jornadas Argentinas de Didáctica de las Ciencias de la Computación (JADiCC), 1-2 de diciembre de 2023, Neuquén, Argentina",
     JADiCC24:"Jornadas Argentinas de Didáctica de las Ciencias de la Computación (JADiCC), 23-25 de octubre de 2024, Río Cuarto, Argentina",
+    JADiCC25:"Jornadas Argentinas de Didáctica de las Ciencias de la Computación (JADiCC), 30-31 de octubre de 2025, San Luis, Argentina",
     JAR24:"Jornadas Argentinas de Robótica (JAR), 4-7 de junio de 2024, Buenos Aires, Argentina",
     JAIIO23:"Simposio Argentino de Educación en Informática (SAEI) - Jornadas Argentinas de Informática e Investigación Operativa (JAIIO) 2023, 4-8 de septiembre de 2023, Buenos Aires, Argentina",
-    CLEI24:"50 Conferencia Latinoamericana de Informática (L CLEI), 12-16 de agosto de 2024, Bahía Blanca, Argentina"
+    JAIIO25:"Simposio Argentino de Educación en Informática (SAEI) - Jornadas Argentinas de Informática e Investigación Operativa (JAIIO) 2025, 4-7 de agosto de 2025, Buenos Aires, Argentina",
+    CLEI24:"50 Conferencia Latinoamericana de Informática (L CLEI), 12-16 de agosto de 2024, Bahía Blanca, Argentina",
+    CLEI25:"51 Conferencia Latinoamericana de Informática (LI CLEI), 27-31 de octubre de 2025, Valparaíso, Chile",
+    CHILECON25:"IEEE CHILECON 2025, 27-31 de octubre de 2025, Valparaíso, Chile"
   },
   autores: {
     "YO":"Gonzalo Pablo Fernández",
@@ -69,6 +73,10 @@ export const todos_mis_datos = {
         edición: 2024,
         fecha:{a:2024,m:2,d:19,h:", de 9:00hs a 13:00hs"},
         rol: {expo: ""}
+      },{
+        edición: 2026,
+        fecha:{a:2026,m:2,d:24,h:", de 9:00hs a 12:00hs"},
+        rol: {expo: ""}
       }]
     },
     FdL:{
@@ -98,6 +106,14 @@ export const todos_mis_datos = {
         edición: 2024,
         fecha:{a:2024,m:5,d:12,h:", de 12:30hs a 17:30hs"},
         rol: {expo: ""}
+      },{
+        edición: 2025,
+        fecha:{a:2025,m:5,d:7,h:", de 13:00hs a 17:00hs"},
+        rol: {taller: "Programación"}
+      },{
+        edición: 2025,
+        fecha:{a:2025,m:5,d:11,h:", de 12:30hs a 17:00hs"},
+        rol: {expo: ""}
       }]
     },
     ForoFdL:{
@@ -109,6 +125,10 @@ export const todos_mis_datos = {
         nombre: "20$^{\\circ}$ Foro Internacional de Enseñanza de Ciencias y Tecnologías",
         fecha: {a:2022,m:5,d:9,h:", de 10:30hs a 12:30hs"},
         rol: {taller: "Problemas"}
+      },{
+        nombre: "23$^{\\circ}$ Foro Internacional de Enseñanza de Ciencias y Tecnologías",
+        fecha: {a:2025,m:5,d:5,h:", de 11:00hs a 13:30hs"},
+        rol: {taller: "Electrónica"}
       }]
     },
     SdC:{
@@ -175,6 +195,10 @@ export const todos_mis_datos = {
         edición: 2024,
         fecha:{a:2024,m:7,d:[10,11,12],h:", de 10:30hs a 13:00hs"},
         rol: {taller: ["Didáctica","Electrónica","Evaluación"]}
+      },{
+        edición: 2025,
+        fecha:{a:2025,m:11,d:[12,13],h:", de 10:30hs a 13:00hs"},
+        rol: {taller: ["Didáctica","Electrónica"]}
       }]
     },
     DOV:{
@@ -286,6 +310,10 @@ export const todos_mis_datos = {
         nombre: "XVII Encuentro Internacional de Profesorados de Enseñanza Superior, Media y Primaria en Ciencias Naturales, Matemática y Tecnología",
         fecha:{a:2023,m:11,d:17,h:", de 9:00hs a 11:00hs"},
         rol: {taller: "Problemas"}
+      },{
+        nombre: "XVIII Encuentro Internacional de Profesorados de Enseñanza Superior, Media y Primaria en Ciencias Naturales, Matemática y Tecnología",
+        fecha:{a:2024,m:11,d:22,h:", de 9:30hs a 11:30hs"},
+        rol: {taller: "Problemas"}
       }]
     },
     NdlM:{
@@ -342,6 +370,9 @@ export const todos_mis_datos = {
       },{
         edición: 2024,
         fecha:{a:2024,m:12,d:11,h:", de 9:00hs a 15:30hs"}
+      },{
+        edición: 2025,
+        fecha:{a:2025,m:12,d:17,h:", de 9:00hs a 18:00hs"}
       }]
     },
     LUDOVER:{
@@ -510,11 +541,18 @@ export const todos_mis_datos = {
       desde: {a:2024, c:2},
       esUnProyecto: true
     },
-    { // Feria CIDAC-UBA
+    { // Feria CIDAC-UBA 2024
       nombre: "Feria de Ciencias",
       descripción: "Exposiciones demostrativas para público general.",
       en: "Centro de Innovación y Desarrollo para la Acción Comunitaria (CIDAC-UBA)",
       fecha: {a:2024,m:8,d:23,h:", de 10:00hs a 14:30hs"},
+      rol: {expo: "RPPT"}
+    },
+    { // Feria CIDAC-UBA 2025
+      nombre: "Feria de Ciencias",
+      descripción: "Exposiciones demostrativas para público general.",
+      en: "Centro de Innovación y Desarrollo para la Acción Comunitaria (CIDAC-UBA)",
+      fecha: {a:2025,m:8,d:29,h:", de 10:00hs a 15:00hs"},
       rol: {expo: "RPPT"}
     },
     { // Feria Houssay
@@ -748,6 +786,62 @@ export const todos_mis_datos = {
       autores: ["YO", "FIDEL", "Alejandro Artopoulos", "Alejandra Lliteras"],
       en: "JADiCC24"/*,
       url: ""*/
+    },
+    { // JAIIO 2025
+      nombre: "\\textbf{Simposio Argentino de Educación en Informática} (SAEI) dentro de las 54$^{\\circ}$ \\textbf{Jornadas Argentinas de Informática} (JAIIO 2025)",
+      rol: "Integrante del \\textbf{Comité de Programa}",
+      fecha: {a:2025,m:8,d:[4,7]},
+      en: "Universidad de Buenos Aires",
+      url: "https://54jaiio.sadio.org.ar/"
+    },
+    { // JAIIO 2025 AelE + Unipe
+      nombre: "Aceptación y apropiación del entorno AelE por parte de docentes en formación",
+      año: 2025,
+      autores: ["Virginia Brassesco", "YO", "Yamila Ojeda"],
+      en: "JAIIO25"/*,
+      url: ""*/
+    },
+    { // CLEI 2025
+      nombre: "51$^a$ \\textbf{Conferencia Latinoamericana de Informática} (CLEI 2025)",
+      rol: "Asistente",
+      fecha: {a:2025,m:10,d:[27,31]},
+      en: "Pontificia Universidad Católica de Valparaíso",
+      url: "https://conferencia2025.clei.org/"
+    },
+    { // 2025 CLEI Comparativa
+      nombre: "Assessment of Arduino block-based programming environments for teaching and learning",
+      año: 2025,
+      autores: ["YO", "CCM"],
+      en: "CLEI25"/*,
+      url: ""*/
+    },
+    { // 2025 CLEI Desafíos
+      nombre: "Challenges of the development of a block-based programming environment for Arduino",
+      año: 2025,
+      autores: ["CCM", "YO"],
+      en: "CHILECON25"/*,
+      url: ""*/
+    },
+    { // JADiCC 2025
+      nombre: "Quintas \\textbf{Jornadas Argentinas de Didáctica de las Ciencias de la Computación} (JADiCC 2025)",
+      rol: "Chair del track \\textbf{Experiencias Docentes}",
+      fecha: {a:2025,m:10,d:[30,31]},
+      en: "Universidad Nacional de San Luis",
+      url: "https://jadicc2025.unsl.edu.ar/"
+    },
+    { // 2025 JADICC Desafíos
+      nombre: "Problemáticas del diseño de un primer curso de programación profesional",
+      año: 2025,
+      autores: ["YO", "FIDEL", "Magdalena Garzón"],
+      en: "JADiCC25"/*,
+      url: ""*/
+    },
+    { // JIF 2025
+      nombre: "VI \\textbf{Jornadas de Investigadores en Formación en Ciencia y Tecnología} (JIF 2025)",
+      rol: "Integrante del \\textbf{Comité Científico}",
+      fecha: {a:2025,m:11,d:[13,14]},
+      en: "UNQ",
+      url: "https://www.unq.edu.ar/noticias/vi-jornadas-de-investigadores-e-investigadoras-en-formacion-en-ciencia-y-tecnologia/"
     }
   ],
   docentes: [
@@ -858,11 +952,23 @@ export const todos_mis_datos = {
       desde: {a:2021, c:2},
       hasta: {a:2022, c:1}
     },
-    { // JTP Unipe 2023 2C + 2024 2C
+    { // JTP Unipe 2023 2C + 2024 2C + 2025 2C
       cargo: "Jtp",
       materia: "Teoría de la Computación",
       en: "Unipe",
-      durante: [{a:2023, c:2},{a:2024, c:2}]
+      durante: [{a:2023, c:2},{a:2024, c:2},{a:2025, c:2}]
+    },
+    { // JTP IP 2025 2C
+      cargo: "Jtp",
+      materia: "Introducción a la Programación",
+      en: "DC",
+      durante: [{a:2025, c:2}]
+    },
+    { // JTP PLP 2026 1C
+      cargo: "Jtp",
+      materia: "Paradigmas de Programación",
+      en: "DC",
+      desde: {a:2026, c:1}
     },
     { // Prof. UNQ 2021 1C ->
       cargo: "PI",
