@@ -62,6 +62,166 @@ for (let k of ["Cx1D","DOV","EVE"]) {
 elementos_extension_articulacion.sort(D.ordenFechas);
 
 const modelos = {
+  general:{
+    esqueleto: function(contenido) {
+      return contenido;
+    },
+    archivos:[
+      { nombre: "docentes.tex",
+        esqueleto: {
+          secciones:[
+            {nombre:'Universitaria', elementos: D.todos_mis_datos.docentes,
+              modeloElemento: function(elemento) {
+                const cargo = D.procesarCargo(elemento);
+                const materia = D.procesarMateria(elemento);
+                const institucion = D.procesarInstitucion(elemento);
+                const tiempo = D.procesarTiempo(elemento);
+                return `    \\WorkEntry{${cargo}}{${tiempo}}{${institucion}}{${materia}}\n\n    \\sepspace`;
+              }
+            },
+            {nombre:'En otros niveles educativos'},
+            {nombre:'Formación pedagogica'},
+            {nombre:'Otras actividades docentes', elementos:elementos_docentes_otros,
+              modeloElemento: function(elemento) {
+                const nombre = D.procesarNombre(elemento);
+                const edición = D.procesarEdición(elemento);
+                const rol = D.procesarRol(elemento);
+                const fecha = D.procesarTiempo(elemento);
+                return `    \\WorkEntry{\\textbf{${nombre}}${edición}}\n      {${rol}}\n      {${fecha}}\n\n    \\sepspace`;
+              }
+            }
+          ]
+        }
+      },
+      { nombre:"divulgacion.tex",
+        esqueleto: {
+          secciones:[
+            {nombre:'Proyectos de Extensión',
+              // secciones:[
+              //   {nombre:'realizados en el ámbito de las Universidades Nacionales.',
+                  elementos: D.todos_mis_datos.extension,
+                  filtro: D.esUnProyectoE
+              //   }
+              // ]
+            },
+            {nombre:'Actividades de divulgación científica',
+              elementos: elementos_extension_divulgacion
+            },
+            {nombre:'Actividades de articulación con otros niveles educativos',
+              elementos: elementos_extension_articulacion,
+              modeloElemento: function(elemento) {
+                const nombre = D.procesarNombre(elemento);
+                const pre = D.procesarPre(elemento);
+                const edición = D.procesarEdición(elemento);
+                const tiempo = D.procesarTiempo(elemento);
+                let info = D.procesarInfo(elemento);
+                if (info.length > 0) {
+                  info = `\\\\\n      ${info}`;
+                }
+                return `      \\NombreFecha{${pre}\\textbf{${nombre}}${edición}}\n      {${tiempo}${info}}\n\n    \\sepspace`;
+              }
+            },
+            {nombre:'Publicaciones'},
+            {nombre:'Presentaciones de proyectos de extensión en congresos, jornadas y otros encuentros de la especialidad'},
+            {nombre:'Otras actividades de extensión no contempladas en los puntos anteriores.'}
+          ],
+          modeloElemento: function(elemento) {
+            const nombre = D.procesarNombre(elemento);
+            const pre = D.procesarPre(elemento);
+            const edición = D.procesarEdición(elemento);
+            const descripción = D.procesarDescripción(elemento);
+            const rol = D.procesarRol(elemento);
+            let campo2 = "";
+            if (descripción.length > 0) {
+              campo2 = descripción;
+              if (rol.length > 0) {
+                campo2 += "\\\\\n      "
+              }
+            }
+            campo2 += rol;
+            let en = D.procesarEn(elemento);
+            const tiempo = D.procesarTiempo(elemento);
+            let info = D.procesarInfo(elemento);
+            if (info.length > 0) {
+              info = `\\\\\n      ${info}`;
+            }
+            if (en.length > 0) {
+              en = `\n      {${en}}`;
+            }
+            return `      \\${(en.length > 0) ? 'WorkEntry' : 'SinLugar'}{${pre}\\textbf{${nombre}}${edición}}\n      {${campo2}}${en}\n      {${tiempo}${info}}\n\n    \\sepspace`;
+          }
+        }
+      },
+      { nombre:"investigacion.tex",
+        esqueleto: {
+          elementos: D.todos_mis_datos.investigacion,
+          secciones:[
+            {nombre:'Trabajos Publicados', filtro:D.esUnaPublicacion,
+              modeloElemento: function(elemento) {
+                const anio = D.procesarAño(elemento);
+                const nombre = D.procesarNombre(elemento);
+                const en = D.procesarEn(elemento);
+                const autores = D.procesarAutores(elemento);
+                return `      \\WorkEntry{${anio} \\textbf{${nombre}}}\n      {${autores}.}\n      {${en}}\n\n    \\sepspace`;
+              }
+            },
+            {nombre:'Participación en congresos o acontecimientos nacionales o internacionales',
+              filtro:D.esUnCongreso,
+              modeloElemento: function(elemento) {
+                const nombre = D.procesarNombre(elemento);
+                const rol = D.procesarRol(elemento);
+                const fecha = D.procesarFecha(elemento.fecha);
+                const en = D.procesarEn(elemento);
+                return `      \\WorkEntry{${nombre}}\n      {${rol}}\n      {${fecha}}\n      {${en}}\n\n    \\sepspace`;
+              }
+            },
+            {nombre:'Formación de Recursos Humanos.', filtro: x => false},
+            {nombre:'Participación en Proyectos de Investigación', filtro:D.esUnProyectoI,
+              modeloElemento: function(elemento) {
+                const nombre = D.procesarNombre(elemento);
+                const título = D.procesarTítulo(elemento);
+                const código = D.procesarCódigo(elemento);
+                let info = D.procesarInfo(elemento);
+                if (info.length > 0) {
+                  info = `\n      {${info}}`;
+                }
+                return `      \\WorkEntry{\\textbf{${nombre}}}\n      {Código ${código}.}\n      {${título}}${info}\n\n    \\sepspace`;
+              }
+            },
+            {nombre:'Cursos de Posgrado no incluidos en la carrera de Doctorado.', filtro: x => false},
+            {nombre:'Otros antecedentes científicos no considerados en los puntos anteriores', filtro: x => false}
+          ]
+        }
+      }
+    ],
+    modeloSeccion: function(dataSeccion, esqueleto) {
+      const f = function(dataSeccion) {
+        let contenido = [];
+        const elementos = 'elementos' in dataSeccion ? dataSeccion.elementos : esqueleto.elementos || [];
+        const filtroSeccion = 'filtro' in dataSeccion ? dataSeccion.filtro : x => true;
+        const modeloElemento = 'modeloElemento' in dataSeccion ? dataSeccion.modeloElemento : esqueleto.modeloElemento;
+        for (let elemento of elementos.filter(filtroSeccion)) {
+          contenido.push(modeloElemento(elemento));
+        }
+        if (contenido.length == 0) {
+          return "";
+        } else {
+          contenido = `\n${contenido.join("\n\n")}\n`;
+        }
+        return `%% ${dataSeccion.nombre}\n\\NewSubPart{${dataSeccion.nombre}}{}\n${contenido}`;
+      }
+      if ('secciones' in dataSeccion) {
+        return f({
+          letra:dataSeccion.letra,
+          nombre:dataSeccion.nombre,
+          modeloElemento: x=>x,
+          elementos: dataSeccion.secciones.map(f)
+        });
+      } else {
+        return f(dataSeccion);
+      }
+    }
+  },
   exactas:{
     esqueleto: function(contenido) {
       return `\\begin{enumerate}[leftmargin=0.8cm]\n\n${contenido}\n\n\\end{enumerate}`;
@@ -221,8 +381,7 @@ const modelos = {
         return f(dataSeccion);
       }
     }
-  },
-  general:{archivos:[]}
+  }
 };
 
 const procesarArchivo = function(dataArchivo, base) {

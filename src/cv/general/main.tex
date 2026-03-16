@@ -68,11 +68,23 @@
         \normalsize \par}
 
 \newcommand{\WorkEntry}[4]{               % Same as \EducationEntry
-        \noindent \textbf{#1} \hfill      % Jobname
-        \colorbox{White}{\color{Black}#2} \par  % Duration
+        \noindent \textbf{#1} \\      % Jobname
+        #2 \par
+        %\colorbox{White}{\color{Black}#2} \par  % Duration
         \noindent \textit{#3} \par              % Company
         \noindent\hangindent=2em\hangafter=0 \small #4 % Description
-        \normalsize \par}
+        \normalsize \par }
+
+\newcommand{\NombreFecha}[2]{             % Actividades que sólo tienen nombre y fecha
+        \noindent \textbf{#1} \par        % Nombre
+        \noindent\hangindent=2em\hangafter=0 \small #2 % Fecha
+        \normalsize \par }
+
+\newcommand{\SinLugar}[3]{               % Actividades que no tienen una locación
+        \noindent \textbf{#1} \\      % Jobname
+        #2 \par
+        \noindent\hangindent=2em\hangafter=0 \small #3 % Description
+        \normalsize \par }
 
 %%% Begin Document
 %%% ------------------------------------------------------------
@@ -137,13 +149,51 @@
 %%% ------------------------------------------------------------
 \NewPart{Experiencia Académica}{}
 
-%% Universitaria
-\NewSubPart{Universitaria}{}
+\input{docentes.tex}
 
-\input{doc_completos.tex}
-%\input{doc_simplificados.tex}
+%%% Experiencia Divulgación
+%%% ------------------------------------------------------------
+\NewPart{Experiencia en Divulgación}{}
 
-\input{full}
-%\input{resume}
+\input{divulgacion.tex}
+
+%%% Experiencia Investigación
+%%% ------------------------------------------------------------
+\NewPart{Experiencia en Investigación}{}
+
+\input{investigacion.tex}
+
+%%% Habilidades
+%%% ------------------------------------------------------------
+\NewPart{Habilidades}{}
+
+\NewSubPart{Idiomas}{}
+
+\SkillsEntry{Español}{Nativo}
+
+\SkillsEntry{Inglés}{Intermedio}
+
+\NewSubPart{Computación}{}
+
+\SkillsEntry{Software}{\textsc{c}, \textsc{c++}, \textsc{java}, \textsc{python},
+%% ply, matplotlib, scikit-learn, keras
+\textsc{javascript},}
+\SkillsEntry{}{\textsc{haskell}, \textsc{smalltalk}, \textsc{gobstones},}
+\SkillsEntry{}{\textsc{blender}, \textsc{godot}, \textsc{unity3d},}
+\SkillsEntry{}{\textsc{verilog}, \textsc{assembler}, \textsc{matlab}}
+
+\sepspace
+
+\SkillsEntry{Otros}{\textsc{linux}, \LaTeX, \textsc{git}, \textsc{html}, \textsc{sql},}
+\SkillsEntry{}{\textsc{visual studio}, \textsc{eclipse}, \textsc{arduino},}
+\SkillsEntry{}{\textsc{android studio}, \textsc{sonic pi}
+%%, \textsc{tomcat}, \textsc{nginx}, \textsc{gnuplot}
+}
+
+
+%%% References
+%%% ------------------------------------------------------------
+%\NewPart{References}{}
+%Available upon request
 
 \end{document}
