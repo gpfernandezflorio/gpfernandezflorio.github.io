@@ -335,7 +335,14 @@ const modelos = {
                 return `      \\WorkEntry{${nombre}}\n      {${rol}}\n      {${fecha}}\n      {${en}}`;
               }
             },
-            {letra:'c', nombre:'Formación de Recursos Humanos.', filtro: x => false},
+            {letra:'c', nombre:'Formación de Recursos Humanos.', elementos: D.todos_mis_datos.tesistas,
+              modeloElemento: function(elemento) {
+                const título = elemento.nombre;
+                const estudiantes = elemento.estudiantes;
+                const fechaYNota = elemento.fechaYNota;
+                return `      \\WorkEntry{\\textbf{${título}}.}\n      {Tesis de Licenciatura en Ciencias de la Computación}\n      {Estudiantes: ${estudiantes}.}{${fechaYNota}.}`;
+              }
+            },
             {letra:'d', nombre:'Participación en Proyectos de Investigación', filtro:D.esUnProyectoI,
               modeloElemento: function(elemento) {
                 const nombre = D.procesarNombre(elemento);

@@ -61,6 +61,20 @@ export const claves = {
 };
 
 export const todos_mis_datos = {
+  tesistas: [
+    { nombre: "ProgrEval: Herramienta para asistir a docentes para la evaluación de conocimientos de programación",
+      estudiantes: "Tomás Caballero y Agustín Fernández Ortúzar",
+      fechaYNota: "Fecha de finalización estimada: mayo de 2026"
+    },
+    { nombre: "Evaluación de calidad de tareas de programación",
+      estudiantes: "Victoria Varani y Bruno Ventrici",
+      fechaYNota: "Fecha de finalización estimada: julio de 2026"
+    },
+    { nombre: "DALALearn: App educativa de programación para enseñar y realizar experimentos",
+      estudiantes: "Federico Alliani y Lucas Raposeiras",
+      fechaYNota: "Finalizada: 9 de marzo de 2026. Nota: 10 (diez)"
+    }
+  ],
   extends_rep: { // Actividades que se repiten
     FMujer:{
       nombre: "Feria del Día de la Mujer y la Niña en la Ciencia",
@@ -801,6 +815,20 @@ export const todos_mis_datos = {
       en: "JAIIO25"/*,
       url: ""*/
     },
+    { // JAIIO 2025 DALA
+      nombre: "DALALearn: Una plataforma para enseñar programación y desarrollar investigaciones educativas",
+      año: 2025,
+      autores: ["Federico Alliani", "Lucas Raposeiras", "YO", "CCM"],
+      en: "JAIIO25"/*,
+      url: ""*/
+    },
+    { // JAIIO 2025 ProgrEval
+      nombre: "ProgrEval: Una propuesta metodológica para la evaluación de conocimientos de programación",
+      año: 2025,
+      autores: ["Tomás Caballero", "Agustín Fernández-Ortúzar", "YO", "CCM"],
+      en: "JAIIO25"/*,
+      url: ""*/
+    },
     { // CLEI 2025
       nombre: "51$^a$ \\textbf{Conferencia Latinoamericana de Informática} (CLEI 2025)",
       rol: "Asistente",
@@ -842,6 +870,13 @@ export const todos_mis_datos = {
       fecha: {a:2025,m:11,d:[13,14]},
       en: "UNQ",
       url: "https://www.unq.edu.ar/noticias/vi-jornadas-de-investigadores-e-investigadoras-en-formacion-en-ciencia-y-tecnologia/"
+    },
+    { // 2026 EJS DALA
+      nombre: "DALALearn: Una plataforma para la enseñanza y la investigación en programación",
+      año: 2026,
+      autores: ["Federico Alliani", "Lucas Raposeiras", "YO", "CCM"],
+      en: "Electronic Journal of SADIO (EJS) 25 (2) 2026"/*,
+      url: ""*/
     }
   ],
   docentes: [
