@@ -11,7 +11,7 @@
 
 const cargo = "JTP" // Para Exactas; puede ser JTP, AYp o AYs
 
-import * as D from './datos.js';
+import * as D from './datos.mjs';
 
 import fs from 'fs';
 const Archivo = fs;

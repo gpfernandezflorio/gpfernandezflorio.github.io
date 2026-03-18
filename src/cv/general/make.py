@@ -22,7 +22,7 @@ def main():
   os.mkdir(carpeta_node)
 
   os.chdir("..")
-  if os.system("node generador.js general dst:general/" + carpeta_node) != 0:
+  if os.system("node generador.mjs general dst:general/" + carpeta_node) != 0:
     fail("No se generaron los archivos de datos (node datos.js)")
   os.chdir("general")
   
