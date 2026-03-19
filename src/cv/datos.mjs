@@ -13,13 +13,13 @@ export const claves = {
   },
   en: {
     // Para docente y eventos
-    DC:"Departamento de Computación (DC) - Facultad de Ciencias Exactas y Naturales (FCEyN) - Universidad de Buneos Aires (UBA)",
-    Exactas:"Facultad de Ciencias Exactas y Naturales (FCEyN) - Universidad de Buneos Aires (UBA)",
+    DC:"Departamento de Computación (DC) - Facultad de Ciencias Exactas y Naturales (FCEyN) - Universidad de Buenos Aires (UBA)",
+    Exactas:"Facultad de Ciencias Exactas y Naturales (FCEyN) - Universidad de Buenos Aires (UBA)",
     Unahur:"Universidad Nacional de Hurlingham (UNaHur)",
     Unipe:"Universidad Pedagógica Nacional (UniPe)",
     UNQ:"Universidad Nacional de Quilmes (UNQ)",
     UNC:"Universidad Nacional de Córdoba (UNC)",
-    DQO:"Departamento de Química Orgánica (DQO) - Facultad de Ciencias Exactas y Naturales (FCEyN) - Universidad de Buneos Aires (UBA)",
+    DQO:"Departamento de Química Orgánica (DQO) - Facultad de Ciencias Exactas y Naturales (FCEyN) - Universidad de Buenos Aires (UBA)",
     // Para investigación
     ICPR20:"International Conference on Pattern Recognition (ICPR) 2020",
     JADiCC21:"Jornadas Argentinas de Didáctica de las Ciencias de la Computación (JADiCC) 2021",
@@ -724,7 +724,7 @@ export const todos_mis_datos = {
     },
     { // JADiCC 2023
       nombre: "Terceras \\textbf{Jornadas Argentinas de Didáctica de las Ciencias de la Computación} (JADiCC 2023)",
-      rol: "Integrante del \\textbf{Comité de Programa}",
+      rol: "Integrante del \\textbf{Comité de Programa} y expositor",
       fecha: {a:2023,m:12,d:[1,2]},
       en: "Universidad Nacional del Comahue",
       url: "https://jadicc2023.program.ar/"
@@ -749,6 +749,12 @@ export const todos_mis_datos = {
       autores: ["YO", "CECI", "FIDEL"],
       en: "Electronic Journal of SADIO (EJS) 23 (2) 2024, pp 150-175",
       url: "https://publicaciones.sadio.org.ar/index.php/EJS/article/view/862/701"
+    },
+    { // JAR 2024
+      nombre: "XII \\textbf{Jornadas Argentinas de Robótica} (JAR 2024)",
+      rol: "Expositor",
+      fecha: {a:2024,m:6,d:[4,7]},
+      en: "Exactas"
     },
     { // 2024 JAR AelE
       nombre: "AelE: una herramienta para la enseñanza de programación basada en Arduino",
@@ -781,7 +787,7 @@ export const todos_mis_datos = {
     },
     { // JADiCC 2024
       nombre: "Cuartas \\textbf{Jornadas Argentinas de Didáctica de las Ciencias de la Computación} (JADiCC 2024)",
-      rol: "Integrante del \\textbf{Comité de Programa}",
+      rol: "Integrante del \\textbf{Comité de Programa} y expositor",
       fecha: {a:2024,m:10,d:[23,24,25]},
       en: "Universidad Nacional de Río Cuarto",
       url: "https://jadicc2024.dc.exa.unrc.edu.ar/"
@@ -816,7 +822,7 @@ export const todos_mis_datos = {
     },
     { // JAIIO 2025
       nombre: "\\textbf{Simposio Argentino de Educación en Informática} (SAEI) dentro de las 54$^{\\circ}$ \\textbf{Jornadas Argentinas de Informática} (JAIIO 2025)",
-      rol: "Integrante del \\textbf{Comité de Programa}",
+      rol: "Integrante del \\textbf{Comité de Programa} y expositor",
       fecha: {a:2025,m:8,d:[4,7]},
       en: "Universidad de Buenos Aires",
       url: "https://54jaiio.sadio.org.ar/"
@@ -865,7 +871,7 @@ export const todos_mis_datos = {
     },
     { // JADiCC 2025
       nombre: "Quintas \\textbf{Jornadas Argentinas de Didáctica de las Ciencias de la Computación} (JADiCC 2025)",
-      rol: "Chair del track \\textbf{Experiencias Docentes}",
+      rol: "Chair del track \\textbf{Experiencias Docentes} y expositor",
       fecha: {a:2025,m:10,d:[30,31]},
       en: "Universidad Nacional de San Luis",
       url: "https://jadicc2025.unsl.edu.ar/"
