@@ -1,3 +1,8 @@
+/* TODO:
+- agregar congreso de extensión en Exactas.
+- agregar jurado de tesis uba y de tip unq
+*/
+
 export const claves = {
   cargo:{
     Ay2: "Ayudante de Segunda",
@@ -63,14 +68,17 @@ export const claves = {
 export const todos_mis_datos = {
   tesistas: [
     { nombre: "ProgrEval: Herramienta para asistir a docentes para la evaluación de conocimientos de programación",
+      en: "DC - FCEyN - UBA",
       estudiantes: "Tomás Caballero y Agustín Fernández Ortúzar",
       fechaYNota: "Fecha de finalización estimada: mayo de 2026"
     },
     { nombre: "Evaluación de calidad de tareas de programación",
+      en: "DC - FCEyN - UBA",
       estudiantes: "Victoria Varani y Bruno Ventrici",
       fechaYNota: "Fecha de finalización estimada: julio de 2026"
     },
     { nombre: "DALALearn: App educativa de programación para enseñar y realizar experimentos",
+      en: "DC - FCEyN - UBA",
       estudiantes: "Federico Alliani y Lucas Raposeiras",
       fechaYNota: "Finalizada: 9 de marzo de 2026. Nota: 10 (diez)"
     }
@@ -94,7 +102,7 @@ export const todos_mis_datos = {
       }]
     },
     FdL:{
-      nombre: "Feria del Libro",
+      nombre: "Feria internacional del Libro de Buenos Aires",
       en: "Zona Explora - La Rural",
       instancias:[{
         edición: 2017,
@@ -131,6 +139,7 @@ export const todos_mis_datos = {
       }]
     },
     ForoFdL:{
+      en: "Ferial Internacional del Libro de Buenos Aires",
       instancias:[{
         nombre: "19$^{\\circ}$ Foro Internacional de Enseñanza de Ciencias y Tecnologías",
         fecha: {a:2019,m:4,d:29,h:", de 10:30hs a 12:30hs"},
@@ -147,6 +156,7 @@ export const todos_mis_datos = {
     },
     SdC:{
       nombre: "Semana de la Computación",
+      en: "DC",
       instancias:[{
         edición: 2014,
         fecha:{a:2014,m:6,d:[17,18,19],h:", de 9:00hs a 16:00hs"},
@@ -185,6 +195,7 @@ export const todos_mis_datos = {
     },
     SdEC:{
       nombre: "Semana de la Enseñanza de las Ciencias",
+      en: "Exactas",
       instancias:[{
         edición: 2017,
         fecha:{a:2017,m:7,d:[13,14],h:", de 13:00hs a 15:30hs"},
@@ -304,6 +315,7 @@ export const todos_mis_datos = {
       }]
     },
     EncuentroProfesorados:{
+      en: "Exactas",
       instancias:[{
         nombre: "XI Encuentro Internacional de Profesorados de Enseñanza Superior, Media y Primaria en Ciencias Naturales y Matemática",
         fecha:{a:2017,m:11,d:24,h:", de 10:30hs a 13:00hs"},
@@ -391,6 +403,7 @@ export const todos_mis_datos = {
     },
     LUDOVER:{
       nombre: "Taller de Videojuegos Ludover",
+      en: "Fundación uqbar",
       instancias:[{
         edición: "edición virtual 2021",
         desde: {a:2021,m:4,d:15},
@@ -633,19 +646,19 @@ export const todos_mis_datos = {
       // \end{itemize}
       // \medskip
     },
-    { // 2020 Tesis de Licenciatura
-      nombre: "Estimación de la Veracidad de Expresiones Faciales utilizando Aprendizaje Profundo",
-      año: 2020,
-      autores: "YO",
-      en: [
-        "\\textbf{Tesis de Licenciatura} para la carrera Licenciatura en Ciencias de la Computación",
-        "Facultad de Ciencias Exactas y Naturales, UBA",
-        "Defendida el 13 de Marzo de 2020",
-        "\\textbf{Directora}: María Elena Buemi",
-        "\\textbf{Jurados}: Enrique Segura y Daniel Acevedo"
-      ],
-      url: "https://gestion.dc.uba.ar/media/academic/grade/thesis/TesisGonzaloFernadez_eXcX1PK.pdf"
-    },
+    // { // 2020 Tesis de Licenciatura
+    //   nombre: "Estimación de la Veracidad de Expresiones Faciales utilizando Aprendizaje Profundo",
+    //   año: 2020,
+    //   autores: "YO",
+    //   en: [
+    //     "\\textbf{Tesis de Licenciatura} para la carrera Licenciatura en Ciencias de la Computación",
+    //     "Facultad de Ciencias Exactas y Naturales, UBA",
+    //     "Defendida el 13 de Marzo de 2020",
+    //     "\\textbf{Directora}: María Elena Buemi",
+    //     "\\textbf{Jurados}: Enrique Segura y Daniel Acevedo"
+    //   ],
+    //   url: "https://gestion.dc.uba.ar/media/academic/grade/thesis/TesisGonzaloFernadez_eXcX1PK.pdf"
+    // },
     { // 2020 ICPR Tesis
       nombre: "Attribute classification for the analysis of genuineness of facial expressions",
       año: 2020,
@@ -662,7 +675,7 @@ export const todos_mis_datos = {
     },
     { // JADiCC 2021
       nombre: "Primeras \\textbf{Jornadas Argentinas de Didáctica de las Ciencias de la Computación} (JADiCC 2021)",
-      rol: "Asistente",
+      rol: "Expositor",
       fecha: {a:2021,m:11,d:[4,5,6]},
       en: "Fundación Sadosky",
       url: "https://jadicc2021.program.ar/"
@@ -676,7 +689,7 @@ export const todos_mis_datos = {
     },
     { // JADiCC 2022
       nombre: "Segundas \\textbf{Jornadas Argentinas de Didáctica de las Ciencias de la Computación} (JADiCC 2022)",
-      rol: "Asistente",
+      rol: "Expositor",
       fecha: {a:2022,m:8,d:[18,19,20]},
       en: "Universidad Nacional del Nordeste",
       url: "https://jadicc2022.unne.edu.ar/"
@@ -690,7 +703,7 @@ export const todos_mis_datos = {
     },
     { // JAIIO 2023
       nombre: "\\textbf{Simposio Argentino de Educación en Informática} (SAEI) dentro de las 52$^{\\circ}$ \\textbf{Jornadas Argentinas de Informática} (JAIIO 2023)",
-      rol: "Asistente",
+      rol: "Expositor",
       fecha: {a:2023,m:9,d:7},
       en: "Universidad Nacional de Tres de Febrero",
       url: "https://52jaiio.sadio.org.ar/"
@@ -753,7 +766,7 @@ export const todos_mis_datos = {
     },
     { // CLEI 2024
       nombre: "50$^a$ \\textbf{Conferencia Latinoamericana de Informática} (CLEI 2024)",
-      rol: "Asistente",
+      rol: "Expositor",
       fecha: {a:2024,m:8,d:[14,15]},
       en: "Universidad Nacional del Sur",
       url: "https://conferencia2024.clei.org/"
@@ -831,7 +844,7 @@ export const todos_mis_datos = {
     },
     { // CLEI 2025
       nombre: "51$^a$ \\textbf{Conferencia Latinoamericana de Informática} (CLEI 2025)",
-      rol: "Asistente",
+      rol: "Expositor",
       fecha: {a:2025,m:10,d:[27,31]},
       en: "Pontificia Universidad Católica de Valparaíso",
       url: "https://conferencia2025.clei.org/"
@@ -1034,12 +1047,15 @@ const fechaElemento = function(elemento) {
   let fecha;
   if ('fecha' in elemento) {
     fecha = elemento.fecha;
+  } else if ('hasta' in elemento) {
+    fecha = elemento.hasta;
   } else if ('desde' in elemento) {
-    fecha = elemento.desde;
+    let hoy = new Date();
+    fecha = {a:hoy.getFullYear(), m:hoy.getMonth()+1, d:hoy.getDate()};
   } else if ('durante' in elemento) {
     fecha = elemento.durante;
-  } else {
-    fecha = {};
+  } else if ('año' in elemento) {
+    fecha = {a:elemento.año, m:1, d:1};
   }
   if (Array.isArray(fecha)) { fecha = fecha[0]; }
   return Object.assign({a:1990,m:1,d:1}, fecha);
@@ -1058,11 +1074,11 @@ export const ordenFechas = function(elemento1, elemento2) {
       if (Array.isArray(dia1)) { dia1 = dia1[0]; }
       let dia2 = fecha2.d;
       if (Array.isArray(dia2)) { dia2 = dia2[0]; }
-      return dia1 - dia2;
+      return dia2 - dia1;
     }
-    return mes1 - mes2;
+    return mes2 - mes1;
   }
-  return año1 - año2;
+  return año2 - año1;
 }
 
 export const procesarCargo = function(elemento) {

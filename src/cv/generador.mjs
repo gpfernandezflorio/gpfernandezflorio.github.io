@@ -35,6 +35,8 @@ const datos_eventos_reps = function(data) {
   return resultado;
 };
 
+const elementos_docentes_universitarios = D.todos_mis_datos.docentes.sort(D.ordenFechas);
+
 const elementos_docentes_otros =
   ["SdEC","EncuentroProfesorados","ForoFdL","LUDOVER"]
   .map(k => datos_eventos_reps(D.todos_mis_datos.extends_rep[k]))
@@ -61,6 +63,11 @@ for (let k of ["Cx1D","DOV","EVE"]) {
 }
 elementos_extension_articulacion.sort(D.ordenFechas);
 
+const elementos_extension_proyectos = D.todos_mis_datos.extension.filter(x => D.esUnProyectoE(x));
+elementos_extension_proyectos.sort(D.ordenFechas);
+
+const investigacion = D.todos_mis_datos.investigacion.sort(D.ordenFechas);
+
 const modelos = {
   general:{
     esqueleto: function(contenido) {
@@ -70,7 +77,7 @@ const modelos = {
       { nombre: "docentes.tex",
         esqueleto: {
           secciones:[
-            {nombre:'Universitaria', elementos: D.todos_mis_datos.docentes,
+            {nombre:'Universitaria', elementos:elementos_docentes_universitarios,
               modeloElemento: function(elemento) {
                 const cargo = D.procesarCargo(elemento);
                 const materia = D.procesarMateria(elemento);
@@ -87,7 +94,12 @@ const modelos = {
                 const edición = D.procesarEdición(elemento);
                 const rol = D.procesarRol(elemento);
                 const fecha = D.procesarTiempo(elemento);
-                return `    \\WorkEntry{\\textbf{${nombre}}${edición}}\n      {${rol}}\n      {${fecha}}\n\n    \\sepspace`;
+                const en = D.procesarEn(elemento);
+                let info = D.procesarInfo(elemento);
+                if (info.length > 0) {
+                  info = `\\\\\n      ${info}`;
+                }
+                return `    \\WorkEntry{\\textbf{${nombre}}${edición}}\n      {${en}}\n      {${rol}}\n      {${fecha}${info}}\n\n    \\sepspace`;
               }
             }
           ]
@@ -99,8 +111,7 @@ const modelos = {
             {nombre:'Proyectos de Extensión',
               // secciones:[
               //   {nombre:'realizados en el ámbito de las Universidades Nacionales.',
-                  elementos: D.todos_mis_datos.extension,
-                  filtro: D.esUnProyectoE
+                  elementos: elementos_extension_proyectos
               //   }
               // ]
             },
@@ -154,7 +165,7 @@ const modelos = {
       },
       { nombre:"investigacion.tex",
         esqueleto: {
-          elementos: D.todos_mis_datos.investigacion,
+          elementos: investigacion,
           secciones:[
             {nombre:'Trabajos Publicados', filtro:D.esUnaPublicacion,
               modeloElemento: function(elemento) {
@@ -240,7 +251,7 @@ const modelos = {
       { nombre:"docentes.tex",
         esqueleto: {
           secciones:[
-            {letra:'a', nombre:'Universitarios', elementos: D.todos_mis_datos.docentes,
+            {letra:'a', nombre:'Universitarios', elementos:elementos_docentes_universitarios,
               modeloElemento: function(elemento) {
                 const cargo = D.procesarCargo(elemento);
                 const materia = D.procesarMateria(elemento);
@@ -257,7 +268,12 @@ const modelos = {
                 const edición = D.procesarEdición(elemento);
                 const rol = D.procesarRol(elemento);
                 const fecha = D.procesarTiempo(elemento);
-                return `      \\WorkEntry{\\textbf{${nombre}}${edición}}\n      {${rol}}\n      {${fecha}}`;
+                const en = D.procesarEn(elemento);
+                let info = D.procesarInfo(elemento);
+                if (info.length > 0) {
+                  info = `\\\\\n      ${info}`;
+                }
+                return `      \\WorkEntry{\\textbf{${nombre}}${edición}}\n      {${en}}\n      {${rol}}\n      {${fecha}${info}}`;
               }
             }
           ]
@@ -269,8 +285,7 @@ const modelos = {
             {letra:'a', nombre:'Proyectos de Extensión actuales y anteriores',
               secciones:[
                 {letra:'i', nombre:'realizados en el ámbito de las Universidades Nacionales.',
-                  elementos: D.todos_mis_datos.extension,
-                  filtro: D.esUnProyectoE
+                  elementos: elementos_extension_proyectos
                 }
               ]
             },
@@ -314,7 +329,7 @@ const modelos = {
       },
       { nombre:"cientificos.tex",
         esqueleto: {
-          elementos: D.todos_mis_datos.investigacion,
+          elementos: investigacion,
           secciones:[
             {letra:'a', nombre:'Trabajos Publicados', filtro:D.esUnaPublicacion,
               modeloElemento: function(elemento) {
@@ -338,9 +353,10 @@ const modelos = {
             {letra:'c', nombre:'Formación de Recursos Humanos.', elementos: D.todos_mis_datos.tesistas,
               modeloElemento: function(elemento) {
                 const título = elemento.nombre;
+                const en = elemento.en;
                 const estudiantes = elemento.estudiantes;
                 const fechaYNota = elemento.fechaYNota;
-                return `      \\WorkEntry{\\textbf{${título}}.}\n      {Tesis de Licenciatura en Ciencias de la Computación}\n      {Estudiantes: ${estudiantes}.}{${fechaYNota}.}`;
+                return `      \\WorkEntry{\\textbf{${título}}.}\n      {Tesis de Licenciatura en Ciencias de la Computación (${en})}\n      {Estudiantes: ${estudiantes}.}{${fechaYNota}.}`;
               }
             },
             {letra:'d', nombre:'Participación en Proyectos de Investigación', filtro:D.esUnProyectoI,
