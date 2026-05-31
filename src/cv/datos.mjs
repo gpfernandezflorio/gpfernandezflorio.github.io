@@ -1,8 +1,3 @@
-/* TODO:
-- agregar congreso de extensión en Exactas.
-- agregar jurado de tesis uba y de tip unq
-*/
-
 export const claves = {
   cargo:{
     Ay2: "Ayudante de Segunda",
@@ -30,8 +25,10 @@ export const claves = {
     JAR24:"Jornadas Argentinas de Robótica (JAR), 4-7 de junio de 2024, Buenos Aires, Argentina",
     JAIIO23:"Simposio Argentino de Educación en Informática (SAEI) - Jornadas Argentinas de Informática e Investigación Operativa (JAIIO) 2023, 4-8 de septiembre de 2023, Buenos Aires, Argentina",
     JAIIO25:"Simposio Argentino de Educación en Informática (SAEI) - Jornadas Argentinas de Informática e Investigación Operativa (JAIIO) 2025, 4-7 de agosto de 2025, Buenos Aires, Argentina",
+    JAIIO26:"Simposio Argentino de Educación en Informática (SAEI) - Jornadas Argentinas de Informática e Investigación Operativa (JAIIO) 2026, 10-13 de agosto de 2026, Buenos Aires, Argentina",
     CLEI24:"50 Conferencia Latinoamericana de Informática (L CLEI), 12-16 de agosto de 2024, Bahía Blanca, Argentina",
     CLEI25:"51 Conferencia Latinoamericana de Informática (LI CLEI), 27-31 de octubre de 2025, Valparaíso, Chile",
+    CLEI26:"52 Conferencia Latinoamericana de Informática (LII CLEI), 7-11 de septiembre de 2026, Ciudad de México, México",
     CHILECON25:"IEEE CHILECON 2025, 27-31 de octubre de 2025, Valparaíso, Chile"
   },
   autores: {
@@ -70,7 +67,7 @@ export const todos_mis_datos = {
     { nombre: "ProgrEval: Herramienta para asistir a docentes para la evaluación de conocimientos de programación",
       en: "DC - FCEyN - UBA",
       estudiantes: "Tomás Caballero y Agustín Fernández Ortúzar",
-      fechaYNota: "Fecha de finalización estimada: mayo de 2026"
+      fechaYNota: "Fecha de finalización estimada: julio de 2026"
     },
     { nombre: "Evaluación de calidad de tareas de programación",
       en: "DC - FCEyN - UBA",
@@ -81,6 +78,20 @@ export const todos_mis_datos = {
       en: "DC - FCEyN - UBA",
       estudiantes: "Federico Alliani y Lucas Raposeiras",
       fechaYNota: "Finalizada: 9 de marzo de 2026. Nota: 10 (diez)"
+    }
+  ],
+  juradoDefensas: [
+    { nombre: "Generación Cartográfica de Costas Segmentadas",
+      año: 2023,
+      categoria: "del Trabajo de Inserción Profesional",
+      en: "Departamento de Ciencia y Tecnología - UNQ",
+      estudiantes: "Bruno Joaquin Lattanzio"
+    },
+    { nombre: "Reconocimiento de expresiones faciales en secuencias a través de Citation-kNN y GANs con preservación de la identidad",
+      año: 2025,
+      categoria: "de la Tesis de Licenciatura",
+      en: "Departamento de Computación - FCEyN, UBA",
+      estudiantes: "Andreas Sturmer"
     }
   ],
   extends_rep: { // Actividades que se repiten
@@ -135,7 +146,15 @@ export const todos_mis_datos = {
       },{
         edición: 2025,
         fecha:{a:2025,m:5,d:11,h:", de 12:30hs a 17:00hs"},
-        rol: {expo: ""}
+        rol: {expo: "RPPT"}
+      },{
+        edición: 2026,
+        fecha:{a:2026,m:5,d:7,h:", de 14:00hs a 17:30hs"},
+        rol: {taller: "Programación"}
+      },{
+        edición: 2026,
+        fecha:{a:2026,m:5,d:10,h:", de 12:30hs a 17:00hs"},
+        rol: {expo: "RPPT"}
       }]
     },
     ForoFdL:{
@@ -896,6 +915,43 @@ export const todos_mis_datos = {
       autores: ["Federico Alliani", "Lucas Raposeiras", "YO", "CCM"],
       en: "Electronic Journal of SADIO (EJS) 25 (2) 2026"/*,
       url: ""*/
+    },
+    { // 2026 Tecnopedagogías
+      nombre: "Repensando el Pensamiento Computacional en tiempos de IA",
+      año: 2026,
+      autores: ["Alejandro Artopoulos", "YO", "FIDEL", "Alejandra Lliteras"],
+      en: "Alejandro Artopoulos (ed.) Tecnopedagogías: Superpoderes docentes en la era de la IA. Aique Grupo Editor"
+    },
+    { // JAIIO 2025
+      nombre: "\\textbf{Simposio Argentino de Educación en Informática} (SAEI) dentro de las 55$^{\\circ}$ \\textbf{Jornadas Argentinas de Informática} (JAIIO 2026)",
+      rol: "Integrante del \\textbf{Comité de Programa}",
+      fecha: {a:2026,m:8,d:[10,13]},
+      en: "Universidad Tecnológica Regional - Facultad Regional La Plata",
+      url: "https://55jaiio.sadio.org.ar/"
+    },
+    { // 2026 JAIIO ProgrEval
+      nombre: "ProgrEval: Generación asistida de consignas de evaluación para la enseñanza de programación",
+      año: 2026,
+      autores: ["Tomás Caballero", "Agustín Fernández-Ortúzar", "YO", "CCM"],
+      en: "JAIIO26"
+    },
+    { // 2026 JAIIO QoCode
+      nombre: "QoCode: Evaluación automática de calidad de código en tareas de programación",
+      año: 2026,
+      autores: ["Victoria Victoria", "Bruno Ventrici", "YO", "CCM"],
+      en: "JAIIO26"
+    },
+    { // 2026 CLEI ProgrEval
+      nombre: "ProgrEval: Assisted Generation of Assessment Tasks for Programming Education",
+      año: 2026,
+      autores: ["Tomás Caballero", "Agustín Fernández-Ortúzar", "YO", "CCM"],
+      en: "CLEI26"
+    },
+    { // 2026 CLEI QoCode
+      nombre: "QoCode: Automated Code Quality Assessment in Programming Assignments",
+      año: 2026,
+      autores: ["Victoria Victoria", "Bruno Ventrici", "YO", "CCM"],
+      en: "CLEI26"
     }
   ],
   docentes: [

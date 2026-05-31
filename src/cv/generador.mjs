@@ -153,13 +153,22 @@ const modelos = {
             let en = D.procesarEn(elemento);
             const tiempo = D.procesarTiempo(elemento);
             let info = D.procesarInfo(elemento);
+            let claseEntrada = 'WorkEntry';
             if (info.length > 0) {
               info = `\\\\\n      ${info}`;
             }
             if (en.length > 0) {
               en = `\n      {${en}}`;
+              if (campo2.length > 0) {
+                campo2 = `\n      {${campo2}}`;
+              } else {
+                claseEntrada = 'SinRol';
+              }
+            } else {
+              claseEntrada = 'SinLugar';
+              campo2 = `\n      {${campo2}}`;
             }
-            return `      \\${(en.length > 0) ? 'WorkEntry' : 'SinLugar'}{${pre}\\textbf{${nombre}}${edición}}\n      {${campo2}}${en}\n      {${tiempo}${info}}\n\n    \\sepspace`;
+            return `      \\${claseEntrada}{${pre}\\textbf{${nombre}}${edición}}${campo2}${en}\n      {${tiempo}${info}}\n\n    \\sepspace`;
           }
         }
       },
