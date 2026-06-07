@@ -3,7 +3,8 @@
 
     - Modelo de cv (uno de los siguientes)
       general : Genérico (default)
-      exactas : Formulario de concursos para Exactas
+      auxiliaresExactas : Formulario de concursos auxiliares para Exactas
+      profInterinoExactas : Formulario de concursos para profesor interino para Exactas
     
     - Destino de los archivos generados (ruta relativa) (default: ruta actual)
       dst:<RUTA>
@@ -242,13 +243,13 @@ const modelos = {
       }
     }
   },
-  exactas:{
+  auxiliaresExactas:{
     esqueleto: function(contenido) {
       return `\\begin{enumerate}[leftmargin=0.8cm]\n\n${contenido}\n\n\\end{enumerate}`;
     },
     archivos:[
       { nombre:"datos_del_aspirante.tex",
-        base:"exactas/template/datos_del_aspirante.tex",
+        base:"auxiliaresExactas/template/datos_del_aspirante.tex",
         reemplazos:[
           {i:"No se tuvo ninguna licencia.", o:obtenerLcencias},
           {i:"% \\newcommand{\\firma}", o:"\\newcommand{\\firma}"},
@@ -413,6 +414,88 @@ const modelos = {
         return f(dataSeccion);
       }
     }
+  },
+  profInterinoExactas:{
+    esqueleto: function(contenido) {
+      return `\\begin{enumerate}[leftmargin=0.8cm]\n\n${contenido}\n\n\\end{enumerate}`;
+    },
+    archivos:[
+      { nombre:"datos_del_aspirante.tex",
+        base:"profInterinoExactas/template/datos_del_aspirante.tex",
+        reemplazos:[
+          {i:"No se tuvo ninguna licencia.", o:obtenerLcencias},
+          {i:"% \\newcommand{\\firma}", o:"\\newcommand{\\firma}"},
+          {i:"{\\escalaFirmaPrincipal}{0.05}",o:"{\\escalaFirmaPrincipal}{0.1}"},
+          {i:"{\\escalaFirmaCadaCarilla}{0.16}",o:"{\\escalaFirmaCadaCarilla}{0.06}"},
+          {i:"\\newcommand{\\AYs}{}",o:`\\newcommand{\\${cargo}}{}`}
+        ]
+      },
+      { nombre:"docentes.tex",
+        contenido: {
+          elementos:elementos_docentes_universitarios,
+          modeloElemento: function(elemento) {
+            const cargo = D.procesarCargo(elemento);
+            const materia = D.procesarMateria(elemento);
+            const institucion = D.procesarInstitucion(elemento);
+            const tiempo = D.procesarTiempo(elemento);
+            return `      \\WorkEntry{\\textbf{${cargo}} ${materia}}\n      {${institucion}.}\n      {${tiempo}}`;
+          }
+        }
+      },
+      { nombre:"cientificos.tex",
+        contenido: {
+          elementos: investigacion,
+          filtro:D.esUnaPublicacion,
+          modeloElemento: function(elemento) {
+            const anio = D.procesarAño(elemento);
+            const nombre = D.procesarNombre(elemento);
+            const en = D.procesarEn(elemento);
+            const autores = D.procesarAutores(elemento);
+            return `      \\WorkEntry{${anio} \\textbf{${nombre}}}\n      {${autores}.}\n      {${en}}`;
+          }
+        }
+      },
+      { nombre:"congresos.tex",
+        contenido: {
+          elementos: investigacion,
+          filtro:D.esUnCongreso,
+          modeloElemento: function(elemento) {
+            const nombre = D.procesarNombre(elemento);
+            const rol = D.procesarRol(elemento);
+            const fecha = D.procesarFecha(elemento.fecha);
+            const en = D.procesarEn(elemento);
+            return `      \\WorkEntry{${nombre}}\n      {${rol}}\n      {${fecha}}\n      {${en}}`;
+          }
+        }
+      },
+      { nombre:"tesistas.tex",
+        contenido: {
+          elementos: D.todos_mis_datos.tesistas,
+          modeloElemento: function(elemento) {
+            const título = elemento.nombre;
+            const en = elemento.en;
+            const estudiantes = elemento.estudiantes;
+            const fechaYNota = elemento.fechaYNota;
+            return `      \\WorkEntry{\\textbf{${título}}.}\n      {Tesis de Licenciatura en Ciencias de la Computación (${en})}\n      {Estudiantes: ${estudiantes}.}{${fechaYNota}.}`;
+          }
+        }
+      }
+    ],
+    modeloSeccion: function(dataSeccion) {
+      let contenido = [];
+      const elementos = dataSeccion.elementos;
+      const filtroSeccion = 'filtro' in dataSeccion ? dataSeccion.filtro : x => true;
+      const modeloElemento = dataSeccion.modeloElemento;
+      for (let elemento of elementos.filter(filtroSeccion)) {
+        contenido.push(modeloElemento(elemento));
+      }
+      if (contenido.length == 0) {
+        contenido = "    \\\\ No corresponde.";
+      } else {
+        contenido = `\n    \\begin{itemize}[leftmargin=0.2cm]\n\n${contenido.join("\n\n")}\n\n    \\end{itemize}`;
+      }
+      return contenido;
+    }
   }
 };
 
@@ -433,6 +516,9 @@ const procesarArchivo = function(dataArchivo, base) {
       contenido.push(modeloSeccion(seccion, dataArchivo.esqueleto));
     }
     escribirArchivo(dataArchivo.nombre, modelos[base].esqueleto(contenido.join("\n\n")));
+  } else if ('contenido' in dataArchivo) {
+    const modeloSeccion = modelos[base].modeloSeccion;
+    escribirArchivo(dataArchivo.nombre, modeloSeccion(dataArchivo.contenido));
   }
   return 0;
 };
@@ -455,7 +541,11 @@ const rutaDestino = function(args) {
 };
 
 const main = function(args) {
-  Modelo.Base = args.includes('exactas') ? "exactas" : "general";
+  Modelo.Base =
+    args.includes('auxiliaresExactas') ? "auxiliaresExactas" : (
+    args.includes('profInterinoExactas') ? "profInterinoExactas" :
+      "general"
+  );
   Modelo.DST = rutaDestino(args);
   
   for (let archivo of modelos[Modelo.Base].archivos) {

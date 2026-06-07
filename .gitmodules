@@ -1,3 +1,3 @@
-[submodule "src/cv/exactas/template"]
-	path = src/cv/exactas/template
+[submodule "src/cv/auxiliaresExactas/template"]
+	path = src/cv/auxiliaresExactas/template
 	url = https://github.com/gpfernandezflorio/formulario-concursos.git
